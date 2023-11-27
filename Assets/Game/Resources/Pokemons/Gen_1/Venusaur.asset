@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b75e07ee8dee846a12ca5b0a5ec7a8, type: 3}
+  m_Name: Venusaur
+  m_EditorClassIdentifier: 
+  name: Venusaur
+  description: "Venusaur is a large, quadrupedal Pok\xE9mon with a turquoise body.
+    It has small red eyes and several large ferns on its back and head. The plant
+    bulb that was on the back of its previous evolutions, Bulbasaur and Ivysaur,
+    has now bloomed into a large flower with large pink petals and a yellow center.
+    The female has a seed in the center.\r"
+  front: {fileID: 21300000, guid: 5b0576bec955cb143a87d884fc8c2192, type: 3}
+  back: {fileID: 21300000, guid: 5e5386232016d964381a5e3d82f53372, type: 3}
+  type_1: 5
+  type_2: 8
+  hp: 0
+  atk: 0
+  def: 0
+  spAtk: 0
+  spDef: 0
+  spd: 0
+  learnableSkills: []
