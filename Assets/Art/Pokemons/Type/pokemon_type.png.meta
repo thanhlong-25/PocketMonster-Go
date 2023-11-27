@@ -136,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pokemon_type_0
+      name: normal
       rect:
         serializedVersion: 2
         x: 2
@@ -157,7 +157,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_1
+      name: grass
       rect:
         serializedVersion: 2
         x: 54
@@ -178,7 +178,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_2
+      name: fire
       rect:
         serializedVersion: 2
         x: 106
@@ -199,7 +199,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_3
+      name: water
       rect:
         serializedVersion: 2
         x: 158
@@ -220,7 +220,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_4
+      name: electric
       rect:
         serializedVersion: 2
         x: 210
@@ -241,7 +241,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_5
+      name: bug
       rect:
         serializedVersion: 2
         x: 262
@@ -262,7 +262,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_6
+      name: flying
       rect:
         serializedVersion: 2
         x: 314
@@ -283,7 +283,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_7
+      name: ground
       rect:
         serializedVersion: 2
         x: 366
@@ -304,7 +304,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_8
+      name: rock
       rect:
         serializedVersion: 2
         x: 418
@@ -325,7 +325,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_10
+      name: poison
       rect:
         serializedVersion: 2
         x: 2
@@ -346,7 +346,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_11
+      name: fighting
       rect:
         serializedVersion: 2
         x: 54
@@ -367,7 +367,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_12
+      name: psychic
       rect:
         serializedVersion: 2
         x: 106
@@ -388,7 +388,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_13
+      name: dark
       rect:
         serializedVersion: 2
         x: 158
@@ -409,7 +409,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_14
+      name: ghost
       rect:
         serializedVersion: 2
         x: 210
@@ -430,7 +430,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_15
+      name: steel
       rect:
         serializedVersion: 2
         x: 262
@@ -451,7 +451,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_16
+      name: ice
       rect:
         serializedVersion: 2
         x: 314
@@ -493,7 +493,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pokemon_type_18
+      name: fairy
       rect:
         serializedVersion: 2
         x: 418
@@ -513,6 +513,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: none
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 80
+        width: 50
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 910dbcfcf8c1b3d4fbc544dd04e8e18c
+      internalID: 1632153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -524,55 +545,72 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pokemon_type_0: 1535852614
-      pokemon_type_1: 2000336701
-      pokemon_type_10: 1054896912
-      pokemon_type_11: -540218425
-      pokemon_type_12: 286645505
-      pokemon_type_13: -912804782
-      pokemon_type_14: -113042985
-      pokemon_type_15: 1234612232
-      pokemon_type_16: -338305702
-      pokemon_type_17: -1492674274
-      pokemon_type_18: -447677792
-      pokemon_type_19: -1677463365
-      pokemon_type_2: 1884545775
-      pokemon_type_20: -498796862
-      pokemon_type_21: -1466655606
-      pokemon_type_22: 637611220
-      pokemon_type_23: 1140031325
-      pokemon_type_24: 1885616263
-      pokemon_type_25: -1920541831
-      pokemon_type_26: -1830077051
-      pokemon_type_27: -1717554243
-      pokemon_type_28: -1285333047
-      pokemon_type_29: 442731766
-      pokemon_type_3: 496770551
-      pokemon_type_30: 1537270739
-      pokemon_type_31: 1683033837
-      pokemon_type_32: 1250112412
-      pokemon_type_33: 863281861
-      pokemon_type_34: 255798760
-      pokemon_type_35: -1476070416
-      pokemon_type_36: 317448799
-      pokemon_type_37: -789048047
-      pokemon_type_38: 1318819190
-      pokemon_type_39: 1013178995
-      pokemon_type_4: 280150060
-      pokemon_type_40: 844556090
-      pokemon_type_41: -322815041
-      pokemon_type_42: 409829027
-      pokemon_type_43: 531661716
-      pokemon_type_44: 69352022
-      pokemon_type_45: 1055060080
-      pokemon_type_46: -1628649821
-      pokemon_type_47: -1126614521
-      pokemon_type_48: 672789072
-      pokemon_type_5: -1934281499
-      pokemon_type_6: -1408009631
-      pokemon_type_7: 1049813662
-      pokemon_type_8: -1903449943
-      pokemon_type_9: 1141798280
+      bug: 771959920
+      dark: 987125157
+      electric: -603973094
+      fairy: -61702409
+      fighting: 1112447924
+      fire: -935634285
+      flying: -1199183473
+      ghost: -1201183080
+      grass: 288591369
+      ground: 1141798280
+      ice: -2135058179
+      none: 1632153
+      normal: 3378995
+      poison: -560926929
+      pokemon_type_1: -2058096496
+      pokemon_type_10: 1383154866
+      pokemon_type_11: 1438513487
+      pokemon_type_12: -208182264
+      pokemon_type_13: 1906311244
+      pokemon_type_14: 1429534421
+      pokemon_type_15: -2039491058
+      pokemon_type_16: 647600909
+      pokemon_type_17: 1323436689
+      pokemon_type_18: 1632153
+      pokemon_type_19: 1438452921
+      pokemon_type_2: 632453544
+      pokemon_type_20: -1580467700
+      pokemon_type_21: 621239949
+      pokemon_type_22: -1492674274
+      pokemon_type_23: 1143921878
+      pokemon_type_24: -1677463365
+      pokemon_type_25: -498796862
+      pokemon_type_26: -1466655606
+      pokemon_type_27: 637611220
+      pokemon_type_28: 1140031325
+      pokemon_type_29: 1885616263
+      pokemon_type_3: 1877363525
+      pokemon_type_30: -1920541831
+      pokemon_type_31: -1830077051
+      pokemon_type_32: -1717554243
+      pokemon_type_33: -1285333047
+      pokemon_type_34: 442731766
+      pokemon_type_35: 1537270739
+      pokemon_type_36: 1683033837
+      pokemon_type_37: 1250112412
+      pokemon_type_38: 863281861
+      pokemon_type_39: 255798760
+      pokemon_type_4: 740978576
+      pokemon_type_40: -1476070416
+      pokemon_type_41: 317448799
+      pokemon_type_42: -789048047
+      pokemon_type_43: 1318819190
+      pokemon_type_44: 1013178995
+      pokemon_type_45: 844556090
+      pokemon_type_46: -322815041
+      pokemon_type_47: 409829027
+      pokemon_type_48: 531661716
+      pokemon_type_5: -1269816928
+      pokemon_type_6: 1825137975
+      pokemon_type_7: -380220254
+      pokemon_type_8: -981418559
+      pokemon_type_9: 69352022
+      psychic: 1055060080
+      rock: -1628649821
+      steel: -1126614521
+      water: 1632153
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

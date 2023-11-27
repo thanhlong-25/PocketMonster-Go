@@ -11,6 +11,8 @@ public class PokemonBase : ScriptableObject {
    [SerializeField] Sprite back;
    [SerializeField] PokemonType type_1;
    [SerializeField] PokemonType type_2;
+   [SerializeField] Sprite type_1_sprite;
+   [SerializeField] Sprite type_2_sprite;
 
    // Base Stats
    [SerializeField] int maxHp;
@@ -36,6 +38,14 @@ public class PokemonBase : ScriptableObject {
 
     public Sprite FrontSprite {
         get { return front; }
+    }
+
+    public Sprite Type_1_Sprite {
+        get { return type_1_sprite; }
+    }
+
+    public Sprite Type_2_Sprite {
+        get { return type_2_sprite; }
     }
 
     public PokemonType Type_1 {

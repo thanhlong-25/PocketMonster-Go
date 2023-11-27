@@ -20,7 +20,9 @@ MonoBehaviour:
   back: {fileID: 21300000, guid: e283a5cefe6dcea4aa3be586bd0fd260, type: 3}
   type_1: 5
   type_2: 8
-  hp: 0
+  type_1_sprite: {fileID: 2000336701, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
+  type_2_sprite: {fileID: 1054896912, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
+  maxHp: 0
   atk: 0
   def: 0
   spAtk: 0

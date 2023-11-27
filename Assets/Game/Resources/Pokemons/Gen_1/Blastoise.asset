@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b75e07ee8dee846a12ca5b0a5ec7a8, type: 3}
+  m_Name: Blastoise
+  m_EditorClassIdentifier: 
+  name: Blastoise
+  description: "Blastoise is a large, bipedal, reptilian Pok\xE9mon. It has a blue
+    body with small purple eyes, a light brown belly, and a stubby tail. It has a
+    large brown shell with two powerful water cannons on either side, which can be
+    withdrawn."
+  front: {fileID: 21300000, guid: 97742f0e82d9d8a408c7ab601a26c8c1, type: 3}
+  back: {fileID: 21300000, guid: 6c0337153ce8bd64a90028dc6930b580, type: 3}
+  type_1: 3
+  type_2: 0
+  type_1_sprite: {fileID: 496770551, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
+  type_2_sprite: {fileID: 0}
+  maxHp: 79
+  atk: 83
+  def: 100
+  spAtk: 85
+  spDef: 105
+  spd: 78
+  learnableSkills:
+  - action: {fileID: 11400000, guid: 51a79007338da55469797e2483e716c6, type: 2}
+    level: 1

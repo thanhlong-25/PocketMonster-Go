@@ -10,22 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80b75e07ee8dee846a12ca5b0a5ec7a8, type: 3}
-  m_Name: Charmander
+  m_Name: Charmeleon
   m_EditorClassIdentifier: 
-  name: Charmander
-  description: "Charmander is a bipedal, reptilian Pok\xE9mon. Most of its body is
-    colored orange, while its underbelly is light yellow and it has blue eyes. It
-    has a flame at the end of its tail, which is said to signify its health."
-  front: {fileID: 21300000, guid: 645118422202c304da41140d49dc0ee2, type: 3}
-  back: {fileID: 21300000, guid: de7c55a482935a34bbdbeb5d3f6fc01a, type: 3}
+  name: Charmeleon
+  description: 
+  front: {fileID: 21300000, guid: 9b7fb706f67a5f242b94e069e6691217, type: 3}
+  back: {fileID: 21300000, guid: e325002c2d720db4ea6bd62d576e60b3, type: 3}
   type_1: 2
   type_2: 0
   type_1_sprite: {fileID: 1884545775, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
   type_2_sprite: {fileID: 0}
-  maxHp: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
+  maxHp: 58
+  atk: 64
+  def: 58
+  spAtk: 80
+  spDef: 65
+  spd: 80
   learnableSkills: []

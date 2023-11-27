@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b75e07ee8dee846a12ca5b0a5ec7a8, type: 3}
+  m_Name: Squirtle
+  m_EditorClassIdentifier: 
+  name: Squirtle
+  description: "Squirtle is a bipedal, reptilian Pok\xE9mon. It has a blue body with
+    purple eyes, a light brown belly, and a tough red-brown shell on its back. It
+    has a long tail that curls into a spiral."
+  front: {fileID: 21300000, guid: c0fe59b11c8d32843a4241ca47331079, type: 3}
+  back: {fileID: 21300000, guid: d2fd5823863a667468ee9cbffd51c565, type: 3}
+  type_1: 3
+  type_2: 0
+  type_1_sprite: {fileID: 496770551, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
+  type_2_sprite: {fileID: 0}
+  maxHp: 44
+  atk: 48
+  def: 65
+  spAtk: 50
+  spDef: 64
+  spd: 43
+  learnableSkills: []
