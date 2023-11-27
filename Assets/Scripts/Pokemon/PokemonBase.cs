@@ -13,7 +13,7 @@ public class PokemonBase : ScriptableObject {
    [SerializeField] PokemonType type_2;
 
    // Base Stats
-   [SerializeField] int hp;
+   [SerializeField] int maxHp;
    [SerializeField] int atk;
    [SerializeField] int def;
    [SerializeField] int spAtk;
@@ -46,8 +46,8 @@ public class PokemonBase : ScriptableObject {
         get { return type_2; }
     }
 
-    public int HealthPoints {
-        get { return hp; }
+    public int MaxHp {
+        get { return maxHp; }
     }
 
     public int Attack {

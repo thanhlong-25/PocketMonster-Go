@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pokemon {
-    PokemonBase pkmBase;
-    int level;
+    public PokemonBase PkmBase { get; set; }
+    public int Level { get; set; }
 
     public List<Skill> Skills { get; set; }
     public int HP;
 
     public Pokemon(PokemonBase pBase, int pLevel) {
-        pkmBase = pBase;
-        level = pLevel;
-        HP = pBase.HealthPoints;
+        PkmBase = pBase;
+        Level = pLevel;
+        HP = MaxHp;
 
         // generate skill
         Skills = new List<Skill>();
-        foreach (var act in pkmBase.LearnableSkills) {
-            if (act.Level <= level) {
+        foreach (var act in PkmBase.LearnableSkills) {
+            if (act.Level <= Level) {
                 Skills.Add(new Skill(act.Base));
             }
 
@@ -26,26 +26,26 @@ public class Pokemon {
     }
 
     public int Attack {
-        get { return Mathf.FloorToInt((pkmBase.Attack * level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((PkmBase.Attack * Level) / 100f) + 5; }
     }
 
     public int Defense {
-        get { return Mathf.FloorToInt((pkmBase.Defense * level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((PkmBase.Defense * Level) / 100f) + 5; }
     }
 
     public int SuperAttack {
-        get { return Mathf.FloorToInt((pkmBase.SuperAttack * level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((PkmBase.SuperAttack * Level) / 100f) + 5; }
     }
 
     public int SuperDefense {
-        get { return Mathf.FloorToInt((pkmBase.SuperDefense * level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((PkmBase.SuperDefense * Level) / 100f) + 5; }
     }
 
     public int Speed {
-        get { return Mathf.FloorToInt((pkmBase.Speed * level) / 100f) + 5; }
+        get { return Mathf.FloorToInt((PkmBase.Speed * Level) / 100f) + 5; }
     }
 
-    public int MaximumHp {
-        get { return Mathf.FloorToInt((pkmBase.HealthPoints * level) / 100f) + 10; }
+    public int MaxHp {
+        get { return Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10; }
     }
 }
