@@ -44,6 +44,40 @@ public class BattleSystem : MonoBehaviour {
         dialogBox.EnabledActionSelector(true);
     }
 
+    IEnumerator PerformPlayerSkill() {
+        state = BattleState.BUSY;
+
+        var skill = playerUnit.Pkm.Skills[currentSkill];
+        yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
+        yield return new WaitForSeconds(1f);
+
+        bool isFainted = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
+        yield return enemyHud.UpdateHPBar();
+
+        if(isFainted) {
+            yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} fainted");
+        } else {
+            StartCoroutine(EnemyMove());
+        }
+    }
+
+    IEnumerator EnemyMove(){
+        state = BattleState.ENEMY_SKILL;
+
+        var skill = enemyUnit.Pkm.GetRandomSkill();
+        yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
+        yield return new WaitForSeconds(1f);
+
+        bool isFainted = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
+        yield return playerHud.UpdateHPBar();
+
+        if(isFainted) {
+            yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} fainted");
+        } else {
+            PlayerAction();
+        }
+    }
+
     void PlayerMove() {
         state = BattleState.PLAYER_SKILL;
         dialogBox.EnabledActionSelector(false);
@@ -79,7 +113,6 @@ public class BattleSystem : MonoBehaviour {
                 // Run
                 //Camera.Stop();
             }
-
         }
     }
 
@@ -93,7 +126,7 @@ public class BattleSystem : MonoBehaviour {
                 --currentSkill;
             }
         } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            if (currentSkill > 0) {
+            if (currentSkill < playerUnit.Pkm.Skills.Count - 2) {
                 currentSkill += 2;
             }
         } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
@@ -104,5 +137,10 @@ public class BattleSystem : MonoBehaviour {
 
         dialogBox.UpdateSkillSelection(currentSkill, playerUnit.Pkm.Skills[currentSkill]);
 
+         if(Input.GetKeyDown(KeyCode.Z)) {
+            dialogBox.EnabledSkillSelector(false);
+            dialogBox.EnabledDialogText(true);
+            StartCoroutine(PerformPlayerSkill());
+        }
     }
 }

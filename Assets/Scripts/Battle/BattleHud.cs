@@ -9,10 +9,12 @@ public class BattleHud : MonoBehaviour {
    [SerializeField] HpBar hpBar;
    [SerializeField] Image type_1;
    [SerializeField] Image type_2;
+    Pokemon _pokemon;
 
    public void setData(Pokemon pokemon) {
+         _pokemon = pokemon;
          nameText.text = pokemon.PkmBase.Name;
-         levelText.text = "Lvl " + pokemon.Level;
+         levelText.text = "Lv." + pokemon.Level;
          hpBar.SetHP((float) pokemon.HP / pokemon.MaxHp);
 
          type_1.sprite = pokemon.PkmBase.Type_1_Sprite;
@@ -21,5 +23,29 @@ public class BattleHud : MonoBehaviour {
                type_2.sprite = pokemon.PkmBase.Type_2_Sprite;
                type_2.enabled = true;
          }
+   }
+
+   public IEnumerator UpdateHPBar() {
+      // int curHp = _pokemon.HP;
+      // Debug.Log(curHp);
+      // int maxHP = _pokemon.MaxHp;
+      // Debug.Log(maxHP);
+
+      // int tinhtien = 0;
+
+      // while (tinhtien != maxHP - curHp) {
+      //       hpText.text = $"{curHp} / {maxHP}";
+      //       //yield return new WaitForSeconds(1f);
+      //       curHp--;
+      //       tinhtien++;
+      //       yield return hpBar.SetHPSmooth((float)curHp / maxHP);
+      // }
+
+      // // Khi HP giảm xuống 0, cập nhật văn bản và thanh HP cuối cùng
+      // //hpText.text = $"{hpText} / {maxHP}";
+      // //yield return hpBar.SetHPSmooth((float)curHp / maxHP);
+
+      //
+      yield return hpBar.SetHPSmooth((float) _pokemon.HP / _pokemon.MaxHp);
    }
 }

@@ -7,14 +7,14 @@ public class BattleDialogBox : MonoBehaviour {
     [SerializeField] int letterPerSecond;
     [SerializeField] Color highlightedColor;
     [SerializeField] Text dialogText;
-    
+
     [SerializeField] GameObject actionSelector;
     [SerializeField] GameObject skillSelector;
     [SerializeField] GameObject skillDetails;
-    
+
     [SerializeField] List<Text> actionTexts;
     [SerializeField] List<Text> skillsText;
-    
+
     [SerializeField] Text skillPPText;
     [SerializeField] Text skillTypeText;
 
@@ -62,7 +62,7 @@ public class BattleDialogBox : MonoBehaviour {
             }
         }
 
-        skillPPText.text = '$PP {skill.timeCanUse}/{skill.SkillBase.TimeCanUse}';
+        skillPPText.text = $"PP {skill.timesCanUse}/{skill.SkillBase.TimesCanUse}";
         skillTypeText.text = skill.SkillBase.Type.ToString();
     }
 
