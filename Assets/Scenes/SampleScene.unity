@@ -1698,7 +1698,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Founded Pokemon!!!
+  m_Text: A wild Pokemon here
 --- !u!222 &237826137
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22985,10 +22985,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1312950079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -45}
-  m_SizeDelta: {x: 125, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &538033226
 CanvasRenderer:
@@ -23354,10 +23354,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1312950079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 62.5, y: -45}
-  m_SizeDelta: {x: 125, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &723875210
 CanvasRenderer:
@@ -23664,10 +23664,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1312950079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 62.5, y: -15}
-  m_SizeDelta: {x: 125, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &911612954
 CanvasRenderer:
@@ -23805,7 +23805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &970776231
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23942,7 +23942,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -289.53, y: -151.3}
+  m_AnchoredPosition: {x: -286.5, y: -149.8}
   m_SizeDelta: {x: 225, y: 65}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &995962196
@@ -24050,7 +24050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -25442,7 +25442,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 286.96, y: 151.7}
+  m_AnchoredPosition: {x: 285.7, y: 149.9}
   m_SizeDelta: {x: 225, y: 68.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148949199
@@ -25670,7 +25670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1312950079
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26489,10 +26489,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1312950079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 187.5, y: -15}
-  m_SizeDelta: {x: 125, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1943328846
 CanvasRenderer:
@@ -26628,8 +26628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31a9bf31d761844a8231dd89dc51ada, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letterPerSecond: 20
-  highlightedColor: {r: 0.06474723, g: 0.36299348, b: 0.9150943, a: 0}
+  letterPerSecond: 30
+  highlightedColor: {r: 0.0141509175, g: 0.15416825, b: 1, a: 1}
   dialogText: {fileID: 237826136}
   actionSelector: {fileID: 970776230}
   skillSelector: {fileID: 1312950078}

@@ -28,4 +28,12 @@ MonoBehaviour:
   spAtk: 109
   spDef: 85
   spd: 100
-  learnableSkills: []
+  learnableSkills:
+  - action: {fileID: 11400000, guid: a9456d6a7c2210c448fa201903f74f4a, type: 2}
+    level: 0
+  - action: {fileID: 11400000, guid: f5c5d2803caf669479defa1dbcb9e558, type: 2}
+    level: 0
+  - action: {fileID: 11400000, guid: 0394be54d5323794c94700aabc140ea6, type: 2}
+    level: 0
+  - action: {fileID: 11400000, guid: 76bdc6c03e4e7424cb2d760d2ed55979, type: 2}
+    level: 0
