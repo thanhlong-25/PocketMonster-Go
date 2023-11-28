@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Action", menuName = "Pokemon/Create new action")]
+[CreateAssetMenu(fileName = "Skill", menuName = "Pokemon/Create new skill")]
 public class SkillBase : ScriptableObject {
    [SerializeField] string name;
    [TextArea]

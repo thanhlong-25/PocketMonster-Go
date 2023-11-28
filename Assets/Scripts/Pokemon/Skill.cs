@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Skill {
     public SkillBase SkillBase { get; set; }
-    public int turnTime { get; set; }
+    public int timeCanUse { get; set; }
 
     public Skill(SkillBase pBase) {
         SkillBase = pBase;
-        turnTime = pBase.TimesCanUse;
+        timeCanUse = pBase.TimesCanUse;
     }
 }
