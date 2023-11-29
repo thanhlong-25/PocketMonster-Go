@@ -33,7 +33,6 @@ public class BattleSystem : MonoBehaviour {
         dialogBox.SetSkillName(playerUnit.Pkm.Skills);
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pkm.PkmBase.Name} appeared !!!");
-        yield return new WaitForSeconds(1f);
 
         PlayerAction();
     }
@@ -49,12 +48,12 @@ public class BattleSystem : MonoBehaviour {
 
         var skill = playerUnit.Pkm.Skills[currentSkill];
         yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
-        yield return new WaitForSeconds(1f);
 
-        bool isFainted = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
+        var damageDetails = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
         yield return enemyHud.UpdateHPBar();
+        yield return ShowDamageDetails(damageDetails);
 
-        if(isFainted) {
+        if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} fainted");
         } else {
             StartCoroutine(EnemyMove());
@@ -66,15 +65,27 @@ public class BattleSystem : MonoBehaviour {
 
         var skill = enemyUnit.Pkm.GetRandomSkill();
         yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
-        yield return new WaitForSeconds(1f);
 
-        bool isFainted = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
+        var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
         yield return playerHud.UpdateHPBar();
+        yield return ShowDamageDetails(damageDetails);
 
-        if(isFainted) {
+        if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} fainted");
         } else {
             PlayerAction();
+        }
+    }
+
+    IEnumerator ShowDamageDetails(DamageDetails damageDetails) {
+        if(damageDetails.Critical > 1f) {
+            yield return dialogBox.TypeDialog("A critical hit !!!");
+        }
+        
+        if(damageDetails.TypeEffectiveness > 1f) {
+            yield return dialogBox.TypeDialog("It's super effective !!!");
+        } else if (damageDetails.TypeEffectiveness < 1f) {
+             yield return dialogBox.TypeDialog("It's not effective !!!");
         }
     }
 

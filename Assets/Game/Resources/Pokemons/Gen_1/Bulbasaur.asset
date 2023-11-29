@@ -22,10 +22,12 @@ MonoBehaviour:
   type_2: 8
   type_1_sprite: {fileID: 2000336701, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
   type_2_sprite: {fileID: 1054896912, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
-  maxHp: 0
-  atk: 0
-  def: 0
-  spAtk: 0
-  spDef: 0
-  spd: 0
-  learnableSkills: []
+  maxHp: 45
+  atk: 49
+  def: 49
+  spAtk: 65
+  spDef: 65
+  spd: 45
+  learnableSkills:
+  - action: {fileID: 11400000, guid: 51a79007338da55469797e2483e716c6, type: 2}
+    level: 1

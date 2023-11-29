@@ -49,22 +49,44 @@ public class Pokemon {
         get { return Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10; }
     }
 
-    public bool TakeDamage(Skill skill, Pokemon attacker) {
-        float modifiers = Random.Range(0.85f, 1f);
+    // bảng công thức tính dame https://pokeviet.blogspot.com/p/blog-page.html
+    public DamageDetails TakeDamage(Skill skill, Pokemon attacker) {
+        float critical = 1f;
+        if(Random.value * 100f <= 10f)
+            critical = 2f;
+
+        float effectiveness = TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_1) * TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_2);
+        
+        var damageDetails = new DamageDetails(){
+            TypeEffectiveness = effectiveness,
+            Critical = critical,
+            isFainted = false
+        };
+
+        float modifiers = Random.Range(0.85f, 1f) * effectiveness * critical;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * skill.SkillBase.Power * ((float)attacker.Attack / Defense) + 2;
+        
         int damage = Mathf.FloorToInt(d * modifiers);
 
         HP -= damage;
         if(HP <= 0) {
             HP = 0;
-            return true;
+            damageDetails.isFainted = true;
         }
-        return false;
+        return damageDetails;
     }
 
     public Skill GetRandomSkill() {
         int r = Random.Range(0, Skills.Count);
         return Skills[r];
     }
+}
+
+public class DamageDetails {
+    public bool isFainted { get; set; }
+
+    public float Critical { get; set; }
+
+    public float TypeEffectiveness { get; set; }
 }
