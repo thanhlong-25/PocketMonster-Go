@@ -49,6 +49,9 @@ public class BattleSystem : MonoBehaviour {
         var skill = playerUnit.Pkm.Skills[currentSkill];
         yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
+        playerUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
         var damageDetails = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
         yield return enemyHud.UpdateHPBar();
         yield return ShowDamageDetails(damageDetails);
@@ -66,6 +69,9 @@ public class BattleSystem : MonoBehaviour {
         var skill = enemyUnit.Pkm.GetRandomSkill();
         yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
+        enemyUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+
         var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
         yield return playerHud.UpdateHPBar();
         yield return ShowDamageDetails(damageDetails);
@@ -81,7 +87,7 @@ public class BattleSystem : MonoBehaviour {
         if(damageDetails.Critical > 1f) {
             yield return dialogBox.TypeDialog("A critical hit !!!");
         }
-        
+
         if(damageDetails.TypeEffectiveness > 1f) {
             yield return dialogBox.TypeDialog("It's super effective !!!");
         } else if (damageDetails.TypeEffectiveness < 1f) {
