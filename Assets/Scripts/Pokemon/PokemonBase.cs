@@ -87,11 +87,11 @@ public class PokemonBase : ScriptableObject {
 
 [System.Serializable]
 public class LearnableSkill {
-    [SerializeField] SkillBase action;
+    [SerializeField] SkillBase skillBase;
     [SerializeField] int level;
 
     public SkillBase Base {
-        get { return action; }
+        get { return skillBase; }
     }
 
     public int Level {

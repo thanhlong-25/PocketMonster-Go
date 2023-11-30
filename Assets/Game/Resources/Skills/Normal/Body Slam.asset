@@ -18,3 +18,4 @@ MonoBehaviour:
   power: 85
   accuracy: 100
   timesCanUse: 15
+  skillAnimationBase: {fileID: 11400000, guid: f3217681b53c7cb42925b1fdc8979f42, type: 2}

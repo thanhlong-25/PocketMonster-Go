@@ -11,6 +11,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] int power;
    [SerializeField] int accuracy; // chính xác
    [SerializeField] int timesCanUse; // số lượt dùng
+   [SerializeField] SkillAnimationBase skillAnimationBase;
 
     public string Name {
         get { return name; }
@@ -34,5 +35,9 @@ public class SkillBase : ScriptableObject {
 
     public int TimesCanUse {
         get { return timesCanUse; }
+    }
+
+    public SkillAnimationBase SkillAnimationBase {
+        get { return skillAnimationBase; }
     }
 }

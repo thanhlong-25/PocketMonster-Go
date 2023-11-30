@@ -57,6 +57,8 @@ public class BattleUnit : MonoBehaviour {
         var sequence = DOTween.Sequence();
         sequence.Append(image.DOColor(Color.gray, 0.1f));
         sequence.Append(image.DOColor(originColor, 0.1f));
+        sequence.Append(image.DOColor(Color.gray, 0.1f));
+        sequence.Append(image.DOColor(originColor, 0.1f));
     }
 
     public void PlayFaintedAnimation() {

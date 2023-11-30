@@ -6,16 +6,19 @@ public class AnimationTest : MonoBehaviour
 {
     [SerializeField] private Sprite[] frameArr;
     private int currentFrame;
-    private float timer;
-    private float frameRate = 0.1f;
+    private float frameRate = 0.15f;
 
-    private void Update() {
-        timer += Time.deltaTime;
+    private void Start()
+    {
+        StartCoroutine(AnimateOnce());
+    }
 
-        if(timer >= frameRate) {
-            timer -= frameRate;
-            currentFrame = (currentFrame + 1) % frameArr.Length;
-            gameObject.GetComponent<SpriteRenderer>().sprite = frameArr[currentFrame];
+    private System.Collections.IEnumerator AnimateOnce()
+    {
+        for (int i = 0; i < frameArr.Length; i++)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = frameArr[i];
+            yield return new WaitForSeconds(frameRate);
         }
     }
 }

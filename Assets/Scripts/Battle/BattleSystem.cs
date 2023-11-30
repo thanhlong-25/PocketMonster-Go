@@ -17,6 +17,9 @@ public class BattleSystem : MonoBehaviour {
     [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
 
+    [SerializeField] SkillAnimation playerSkillAnimation;
+    [SerializeField] SkillAnimation enemySkillAnimation;
+
     BattleState state;
     int currentAction;
     int currentSkill;
@@ -53,6 +56,8 @@ public class BattleSystem : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         enemyUnit.PlayHitAnimation();
 
+        StartCoroutine(playerSkillAnimation.PlaySkillAnimation(playerUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+
         var damageDetails = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
         yield return enemyHud.UpdateHPBar();
         yield return ShowDamageDetails(damageDetails);
@@ -74,6 +79,8 @@ public class BattleSystem : MonoBehaviour {
         enemyUnit.PlayAttackAnimation();
         yield return new WaitForSeconds(1f);
         playerUnit.PlayHitAnimation();
+
+        StartCoroutine(enemySkillAnimation.PlaySkillAnimation(playerUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
 
         var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
         yield return playerHud.UpdateHPBar();
