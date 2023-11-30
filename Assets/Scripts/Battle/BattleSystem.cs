@@ -80,7 +80,7 @@ public class BattleSystem : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         playerUnit.PlayHitAnimation();
 
-        StartCoroutine(enemySkillAnimation.PlaySkillAnimation(playerUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+        StartCoroutine(enemySkillAnimation.PlaySkillAnimation(enemyUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
 
         var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
         yield return playerHud.UpdateHPBar();

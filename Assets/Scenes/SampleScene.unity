@@ -23120,8 +23120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8d94ad77fb2e646b8502387a8b8f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pkmBase: {fileID: 11400000, guid: 247bde868b840c04c9e907ad2020fab2, type: 2}
-  level: 3
+  pkmBase: {fileID: 11400000, guid: bd0fe1ea185323d4d961bf9de42d8397, type: 2}
+  level: 65
   isPlayerUnit: 1
 --- !u!1 &548245199
 GameObject:
@@ -23132,7 +23132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548245200}
-  - component: {fileID: 548245202}
   - component: {fileID: 548245201}
   - component: {fileID: 548245203}
   m_Layer: 0
@@ -23209,31 +23208,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &548245202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548245199}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acc07e43fccb1040b778be9a2784124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frameArr:
-  - {fileID: -1670950487, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 397711681, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -1482142897, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 288099859, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -682573913, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -1398071614, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1247819654, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1136194711, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 112078199, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 592972737, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -527412899, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1551289477, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
 --- !u!114 &548245203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26168,7 +26142,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1538107430}
-  - component: {fileID: 1538107432}
   - component: {fileID: 1538107431}
   - component: {fileID: 1538107433}
   m_Layer: 0
@@ -26245,31 +26218,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1538107432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538107429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acc07e43fccb1040b778be9a2784124, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  frameArr:
-  - {fileID: -1670950487, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 397711681, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -1482142897, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 288099859, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -682573913, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -1398071614, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1247819654, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1136194711, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 112078199, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 592972737, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: -527412899, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
-  - {fileID: 1551289477, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
 --- !u!114 &1538107433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26458,8 +26406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8d94ad77fb2e646b8502387a8b8f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pkmBase: {fileID: 11400000, guid: 2370cdee0aa78064981243f54096212b, type: 2}
-  level: 5
+  pkmBase: {fileID: 11400000, guid: e96d7605872a9e24d9802cdde1fd520b, type: 2}
+  level: 68
   isPlayerUnit: 0
 --- !u!114 &1752232490
 MonoBehaviour:
