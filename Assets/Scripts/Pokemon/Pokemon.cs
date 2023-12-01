@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Pokemon {
-    public PokemonBase PkmBase { get; set; }
-    public int Level { get; set; }
+    [SerializeField] PokemonBase _PkmBase;
+    [SerializeField] int _level;
+
+    public PokemonBase PkmBase { 
+        get {
+            return _PkmBase;
+        }
+    }
+    public int Level { 
+        get {
+            return _level;
+        }
+    }
 
     public List<Skill> Skills { get; set; }
-    public int HP;
+    public int HP { get; set; }
 
-    public Pokemon(PokemonBase pBase, int pLevel) {
-        PkmBase = pBase;
-        Level = pLevel;
+    public void Init() {
         HP = MaxHp;
 
         // generate skill
@@ -52,7 +62,7 @@ public class Pokemon {
     // bảng công thức tính dame https://pokeviet.blogspot.com/p/blog-page.html
     public DamageDetails TakeDamage(Skill skill, Pokemon attacker) {
         float critical = 1f;
-        if(Random.value * 100f <= 10f)
+        if(Random.value * 100f <= 6.25f)
             critical = 2f;
 
         float effectiveness = TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_1) * TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_2);
@@ -63,9 +73,12 @@ public class Pokemon {
             isFainted = false
         };
 
+        float attack = (skill.SkillBase.IsSpecial) ? attacker.SuperAttack : attacker.Attack;
+        float defense = (skill.SkillBase.IsSpecial) ? attacker.SuperDefense : attacker.Defense;
+
         float modifiers = Random.Range(0.85f, 1f) * effectiveness * critical;
         float a = (2 * attacker.Level + 10) / 250f;
-        float d = a * skill.SkillBase.Power * ((float)attacker.Attack / Defense) + 2;
+        float d = a * skill.SkillBase.Power * ((float)attack / defense) + 2;
         
         int damage = Mathf.FloorToInt(d * modifiers);
 

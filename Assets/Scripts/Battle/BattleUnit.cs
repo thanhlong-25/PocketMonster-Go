@@ -20,8 +20,8 @@ public class BattleUnit : MonoBehaviour {
         originColor = image.color;
     }
 
-    public void Setup() {
-        Pkm = new Pokemon(pkmBase, level);
+    public void Setup(Pokemon pokemon) {
+        Pkm = pokemon;
 
         if (isPlayerUnit) {
             image.sprite = Pkm.PkmBase.BackSprite;

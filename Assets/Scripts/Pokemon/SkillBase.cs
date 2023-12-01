@@ -40,4 +40,20 @@ public class SkillBase : ScriptableObject {
     public SkillAnimationBase SkillAnimationBase {
         get { return skillAnimationBase; }
     }
+
+    public bool IsSpecial {
+        get {
+            if (type == PokemonType.FIRE
+                || type == PokemonType.WATER
+                || type == PokemonType.GRASS
+                || type == PokemonType.DRAGON
+                || type == PokemonType.ICE
+                || type == PokemonType.ELECTRIC
+            ) {
+                return true;
+            }
+
+            return false;
+        }
+    }
 }

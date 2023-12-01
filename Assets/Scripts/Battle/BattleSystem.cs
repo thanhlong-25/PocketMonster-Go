@@ -26,15 +26,19 @@ public class BattleSystem : MonoBehaviour {
     int currentSkill;
 
     public event Action<bool> OnBattleOver;
-
-    public void StartBattle() {
+    PokemonParty playerParty;
+    Pokemon wildPokemon;
+    
+    public void StartBattle(PokemonParty playerParty, Pokemon wildPokemon) {
+        this.playerParty = playerParty;
+        this.wildPokemon = wildPokemon;
         StartCoroutine(SetupBattle());
     }
 
     public IEnumerator SetupBattle() {
-        playerUnit.Setup();
+        playerUnit.Setup(playerParty.GetHealthyPokemon());
+        enemyUnit.Setup(wildPokemon);
         playerHud.setData(playerUnit.Pkm);
-        enemyUnit.Setup();
         enemyHud.setData(enemyUnit.Pkm);
         dialogBox.SetSkillName(playerUnit.Pkm.Skills);
 
@@ -53,6 +57,7 @@ public class BattleSystem : MonoBehaviour {
         state = BattleState.BUSY;
 
         var skill = playerUnit.Pkm.Skills[currentSkill];
+        skill.timesCanUse--;
         yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
         playerUnit.PlayAttackAnimation();
@@ -82,6 +87,7 @@ public class BattleSystem : MonoBehaviour {
         state = BattleState.ENEMY_SKILL;
 
         var skill = enemyUnit.Pkm.GetRandomSkill();
+        skill.timesCanUse--;
         yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
         enemyUnit.PlayAttackAnimation();

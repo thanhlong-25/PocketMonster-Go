@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bind
   description: Traps opponent, damaging them for 4-5 turns.
-  type: 3
+  type: 1
   power: 15
   accuracy: 85
   timesCanUse: 20
