@@ -29,6 +29,7 @@ public class BattleUnit : MonoBehaviour {
             image.sprite = Pkm.PkmBase.FrontSprite;
         }
 
+        image.color = originColor;
         PlayerEnterAnimation();
     }
 

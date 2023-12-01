@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,9 @@ public class BattleSystem : MonoBehaviour {
     int currentAction;
     int currentSkill;
 
-    private void Start() {
+    public event Action<bool> OnBattleOver;
+
+    public void StartBattle() {
         StartCoroutine(SetupBattle());
     }
 
@@ -57,14 +60,19 @@ public class BattleSystem : MonoBehaviour {
         enemyUnit.PlayHitAnimation();
 
         StartCoroutine(playerSkillAnimation.PlaySkillAnimation(playerUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+        yield return new WaitForSeconds(1f);
 
         var damageDetails = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
         yield return enemyHud.UpdateHPBar();
         yield return ShowDamageDetails(damageDetails);
 
+        yield return new WaitForSeconds(1f);
         if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} fainted");
             enemyUnit.PlayFaintedAnimation();
+            
+            yield return new WaitForSeconds(2f);
+            OnBattleOver(true);
         } else {
             StartCoroutine(EnemyMove());
         }
@@ -81,14 +89,19 @@ public class BattleSystem : MonoBehaviour {
         playerUnit.PlayHitAnimation();
 
         StartCoroutine(enemySkillAnimation.PlaySkillAnimation(enemyUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+        yield return new WaitForSeconds(0.5f);
 
         var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
         yield return playerHud.UpdateHPBar();
         yield return ShowDamageDetails(damageDetails);
 
+        yield return new WaitForSeconds(1f);
         if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} fainted");
             playerUnit.PlayFaintedAnimation();
+
+            yield return new WaitForSeconds(2f);
+            OnBattleOver(false);
         } else {
             PlayerAction();
         }
@@ -113,7 +126,7 @@ public class BattleSystem : MonoBehaviour {
         dialogBox.EnabledSkillSelector(true);
     }
 
-    private void Update() {
+    public void HandleUpdate() {
         if (state == BattleState.PLAYER_ACTION) {
             HandleActionSelection();
         } else if (state == BattleState.PLAYER_SKILL) {

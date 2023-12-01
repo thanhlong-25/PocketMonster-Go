@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour {
     public LayerMask foregroundLayer;
     public LayerMask grassLayer;
 
+    public event Action OnEncoutered;
+
     private bool isMoving;
     private Vector2 input;
     private Animator animator;
@@ -15,7 +18,7 @@ public class PlayerController : MonoBehaviour {
         animator = GetComponent<Animator>();
     }
 
-    private void Update() {
+    public void HandleUpdate() {
         if (!isMoving) {
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
@@ -59,8 +62,9 @@ public class PlayerController : MonoBehaviour {
 
     private void checkForEncounters() {
         if (Physics2D.OverlapCircle(transform.position, 0.1f, grassLayer) != null) {
-            if (Random.Range(1, 100) <= 10 ) {
-                Debug.Log("Catch a Pokemon!!!");
+            if (UnityEngine.Random.Range(1, 100) <= 10 ) {
+                animator.SetBool("isMoving", false);
+                OnEncoutered();
             }
         }
     }
