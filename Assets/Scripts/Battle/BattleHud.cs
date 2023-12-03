@@ -28,8 +28,6 @@ public class BattleHud : MonoBehaviour {
       }
 
       public IEnumerator UpdateHPBar() {
-            //yield return hpBar.SetHPSmooth((float) _pokemon.HP / _pokemon.MaxHp);
-            //yield return UpdateHpText();
             IEnumerator smoothHP = hpBar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHp);
             StartCoroutine(smoothHP);
 
@@ -39,11 +37,17 @@ public class BattleHud : MonoBehaviour {
       public IEnumerator UpdateHpText() {
             int curHp = _pokemon.HP;
             int maxHP = _pokemon.MaxHp;
+            int damage = maxHP - curHp;
             int tempHp = int.Parse(hpText.text.Split('/')[0]);
 
             while (tempHp >= curHp) {
                   hpText.text = $"{tempHp} / {maxHP}";
-                  yield return new WaitForSeconds(0.2f);
+                  if(damage <= 5) yield return new WaitForSeconds(0.2f);
+                  else if(damage <= 10) yield return new WaitForSeconds(0.1f);
+                  else if(damage <= 20) yield return new WaitForSeconds(0.05f);
+                  else if(damage <= 30) yield return new WaitForSeconds(0.025f);
+                  else if(damage <= 40) yield return new WaitForSeconds(0.0175f);
+                  else yield return new WaitForSeconds(0.00875f);
                   tempHp--;
             }
       }

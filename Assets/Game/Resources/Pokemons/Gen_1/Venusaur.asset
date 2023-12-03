@@ -24,6 +24,7 @@ MonoBehaviour:
   type_2: 8
   type_1_sprite: {fileID: 2000336701, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
   type_2_sprite: {fileID: 1054896912, guid: 20c0bf0f9e6119648a0d0b7632837803, type: 3}
+  sprite_3D: {fileID: 21300000, guid: b87304bc94b60954bae2114b54435218, type: 3}
   maxHp: 80
   atk: 82
   def: 83

@@ -13,6 +13,7 @@ public class PokemonBase : ScriptableObject {
    [SerializeField] PokemonType type_2;
    [SerializeField] Sprite type_1_sprite;
    [SerializeField] Sprite type_2_sprite;
+   [SerializeField] Sprite sprite_3D;
 
    // Base Stats
    [SerializeField] int maxHp;
@@ -78,6 +79,10 @@ public class PokemonBase : ScriptableObject {
 
     public int Speed {
         get { return spd; }
+    }
+
+    public Sprite Sprite_3D {
+        get { return sprite_3D; }
     }
 
     public List<LearnableSkill> LearnableSkills {
@@ -152,7 +157,7 @@ public class TypeChart {
 
         int row = (int)attackType - 1;
         int col = (int)defenseType - 1;
-        
+
         return chart[row][col];
     }
 }
