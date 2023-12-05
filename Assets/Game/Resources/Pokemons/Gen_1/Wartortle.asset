@@ -28,9 +28,11 @@ MonoBehaviour:
   spDef: 80
   spd: 58
   learnableSkills:
-  - skillBase: {fileID: 11400000, guid: f5c5d2803caf669479defa1dbcb9e558, type: 2}
+  - skillBase: {fileID: 11400000, guid: 94ad41c0d05a2b1419ab4573c9813a1a, type: 2}
     level: 1
-  - skillBase: {fileID: 11400000, guid: a9456d6a7c2210c448fa201903f74f4a, type: 2}
+  - skillBase: {fileID: 11400000, guid: 3d7cce9433766164ab907017691d3739, type: 2}
     level: 1
-  - skillBase: {fileID: 11400000, guid: 0394be54d5323794c94700aabc140ea6, type: 2}
+  - skillBase: {fileID: 11400000, guid: 4d09e79c47b13684e829f83b67e47bb9, type: 2}
+    level: 1
+  - skillBase: {fileID: 11400000, guid: cec01ff3056c96a489281e08d8aa155a, type: 2}
     level: 1

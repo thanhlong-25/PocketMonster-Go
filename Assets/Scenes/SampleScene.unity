@@ -23650,8 +23650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8d94ad77fb2e646b8502387a8b8f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pkmBase: {fileID: 11400000, guid: 247bde868b840c04c9e907ad2020fab2, type: 2}
-  level: 65
+  hud: {fileID: 1157848943}
   isPlayerUnit: 1
 --- !u!1 &548245199
 GameObject:
@@ -24546,10 +24545,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 970776231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 115, y: -15}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &786270579
 MonoBehaviour:
@@ -25281,10 +25280,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 970776231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 35, y: -45}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &964635329
 MonoBehaviour:
@@ -25578,10 +25577,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 970776231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 115, y: -45}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1054705960
 MonoBehaviour:
@@ -28418,23 +28417,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wildPokemons:
   - _PkmBase: {fileID: 11400000, guid: 247bde868b840c04c9e907ad2020fab2, type: 2}
-    _level: 50
+    _level: 15
   - _PkmBase: {fileID: 11400000, guid: 4701c4e8674f8224a83c9ac621ace6bc, type: 2}
-    _level: 50
+    _level: 35
   - _PkmBase: {fileID: 11400000, guid: c8614b8d682ce5849aa80b4e13272ac8, type: 2}
-    _level: 50
+    _level: 65
   - _PkmBase: {fileID: 11400000, guid: 32df287f3469dbf4ab96301fb02fdefa, type: 2}
-    _level: 50
+    _level: 25
   - _PkmBase: {fileID: 11400000, guid: bd0fe1ea185323d4d961bf9de42d8397, type: 2}
-    _level: 50
+    _level: 5
   - _PkmBase: {fileID: 11400000, guid: 2370cdee0aa78064981243f54096212b, type: 2}
-    _level: 50
-  - _PkmBase: {fileID: 11400000, guid: e96d7605872a9e24d9802cdde1fd520b, type: 2}
-    _level: 50
-  - _PkmBase: {fileID: 11400000, guid: fe2604945af0ec64f86d0e6862728aae, type: 2}
-    _level: 50
-  - _PkmBase: {fileID: 11400000, guid: a0764239902cd1640b2143c2a5ae086c, type: 2}
-    _level: 50
+    _level: 6
+  - _PkmBase: {fileID: 11400000, guid: 307e97407921a364ab745bfa290a7daa, type: 2}
+    _level: 33
+  - _PkmBase: {fileID: 11400000, guid: 619eff9307a151649930ad7dc95d5432, type: 2}
+    _level: 44
+  - _PkmBase: {fileID: 11400000, guid: 55a463be6526a1f46b41afd8779395e3, type: 2}
+    _level: 1
 --- !u!1 &1752232487
 GameObject:
   m_ObjectHideFlags: 0
@@ -28485,8 +28484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8d94ad77fb2e646b8502387a8b8f74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pkmBase: {fileID: 11400000, guid: e96d7605872a9e24d9802cdde1fd520b, type: 2}
-  level: 68
+  hud: {fileID: 65649115}
   isPlayerUnit: 0
 --- !u!114 &1752232490
 MonoBehaviour:
@@ -28633,10 +28631,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 970776231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 35, y: -15}
+  m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1766877403
 MonoBehaviour:
@@ -28775,7 +28773,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1839538383
 Transform:
   m_ObjectHideFlags: 0
@@ -28807,8 +28805,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerUnit: {fileID: 543470361}
   enemyUnit: {fileID: 1752232489}
-  playerHud: {fileID: 1157848943}
-  enemyHud: {fileID: 65649115}
   dialogBox: {fileID: 1996561023}
   partyScreen: {fileID: 1166382277}
   playerSkillAnimation: {fileID: 548245203}
@@ -29553,12 +29549,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pokemons:
-  - _PkmBase: {fileID: 11400000, guid: 4701c4e8674f8224a83c9ac621ace6bc, type: 2}
-    _level: 35
-  - _PkmBase: {fileID: 11400000, guid: a0764239902cd1640b2143c2a5ae086c, type: 2}
-    _level: 40
-  - _PkmBase: {fileID: 11400000, guid: c8614b8d682ce5849aa80b4e13272ac8, type: 2}
-    _level: 78
+  - _PkmBase: {fileID: 11400000, guid: 55a463be6526a1f46b41afd8779395e3, type: 2}
+    _level: 60
+  - _PkmBase: {fileID: 11400000, guid: 619eff9307a151649930ad7dc95d5432, type: 2}
+    _level: 60
+  - _PkmBase: {fileID: 11400000, guid: 307e97407921a364ab745bfa290a7daa, type: 2}
+    _level: 60
 --- !u!1 &2063297801
 GameObject:
   m_ObjectHideFlags: 0

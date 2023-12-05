@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1d7aab9022369469a4e087fdfeafaa, type: 3}
+  m_Name: Electric
+  m_EditorClassIdentifier: 
+  name: Electric
+  skillFrame:
+  - {fileID: -1249803524, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: -484836882, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: 423475878, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: -1841546844, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: 43108921, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: -797950462, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: -2055327014, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: 1680097221, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
+  - {fileID: 668017882, guid: cd3a2b2b4c20cc34290d2948d1c33819, type: 3}
