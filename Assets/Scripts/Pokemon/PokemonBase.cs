@@ -126,6 +126,14 @@ public enum PokemonType {
     , FAIRY
 }
 
+public enum Stat {
+    ATTACK,
+    DEFENSE,
+    SUPER_ATTACK,
+    SUPER_DEFENSE,
+    SPEED
+}
+
 public class TypeChart {
     static float[][] chart = {
         //Defense               Nor   Fir   Wat   Ele   Gra   Ice   Fig   Poi   Gro   Fly   Psy   Bug   Roc   Gho   Dra   Dar  Ste    Fai

@@ -7,12 +7,12 @@ public class Pokemon {
     [SerializeField] PokemonBase _PkmBase;
     [SerializeField] int _level;
 
-    public PokemonBase PkmBase { 
+    public PokemonBase PkmBase {
         get {
             return _PkmBase;
         }
     }
-    public int Level { 
+    public int Level {
         get {
             return _level;
         }
@@ -20,10 +20,10 @@ public class Pokemon {
 
     public List<Skill> Skills { get; set; }
     public int HP { get; set; }
+    public Dictionary<Stat, int> Stats { get; private set; }
+    public Dictionary<Stat, int> StatsBoost { get; private set; }
 
     public void Init() {
-        HP = MaxHp;
-
         // generate skill
         Skills = new List<Skill>();
         foreach (var act in PkmBase.LearnableSkills) {
@@ -32,32 +32,67 @@ public class Pokemon {
             }
 
             if(Skills.Count >= 4) break;
+
+            CalculateStats();
+            HP = MaxHp;
+
+            StatsBoost = new Dictionary<Stat, int>() {
+                {Stat.ATTACK, 0},
+                {Stat.DEFENSE, 0},
+                {Stat.SUPER_ATTACK, 0},
+                {Stat.SUPER_DEFENSE, 0},
+                {Stat.SPEED, 0}
+            };
         }
     }
 
+    void CalculateStats() {
+        Stats = new Dictionary<Stat, int>();
+        Stats.Add(Stat.ATTACK, Mathf.FloorToInt((PkmBase.Attack * Level) / 100f) + 5);
+        Stats.Add(Stat.DEFENSE, Mathf.FloorToInt((PkmBase.Defense * Level) / 100f) + 5);
+        Stats.Add(Stat.SUPER_ATTACK, Mathf.FloorToInt((PkmBase.SuperAttack * Level) / 100f) + 5);
+        Stats.Add(Stat.SUPER_DEFENSE, Mathf.FloorToInt((PkmBase.SuperDefense * Level) / 100f) + 5);
+        Stats.Add(Stat.SPEED, Mathf.FloorToInt((PkmBase.Speed * Level) / 100f) + 5);
+
+        MaxHp = Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10;
+    }
+
+    int GetStat(Stat stat) {
+        int value =  Stats[stat];
+
+        //Apply boost
+        int boost = StatsBoost[stat];
+        var boostVal = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
+        if(boost >= 0) {
+            value = Mathf.FloorToInt(value * boostVal[boost]);
+        } else {
+            value = Mathf.FloorToInt(value / boostVal[-boost]);
+        }
+
+        return value;
+    }
+
     public int Attack {
-        get { return Mathf.FloorToInt((PkmBase.Attack * Level) / 100f) + 5; }
+        get { return GetStat(Stat.ATTACK); }
     }
 
     public int Defense {
-        get { return Mathf.FloorToInt((PkmBase.Defense * Level) / 100f) + 5; }
+        get { return GetStat(Stat.DEFENSE); }
     }
 
     public int SuperAttack {
-        get { return Mathf.FloorToInt((PkmBase.SuperAttack * Level) / 100f) + 5; }
+        get { return GetStat(Stat.SUPER_ATTACK); }
     }
 
     public int SuperDefense {
-        get { return Mathf.FloorToInt((PkmBase.SuperDefense * Level) / 100f) + 5; }
+        get { return GetStat(Stat.SUPER_DEFENSE); }
     }
 
     public int Speed {
-        get { return Mathf.FloorToInt((PkmBase.Speed * Level) / 100f) + 5; }
+        get { return GetStat(Stat.SPEED); }
     }
 
-    public int MaxHp {
-        get { return Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10; }
-    }
+    public int MaxHp { get; private set; }
 
     // bảng công thức tính dame https://pokeviet.blogspot.com/p/blog-page.html
     public DamageDetails TakeDamage(Skill skill, Pokemon attacker) {
@@ -66,20 +101,20 @@ public class Pokemon {
             critical = 2f;
 
         float effectiveness = TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_1) * TypeChart.GetEffectiveness(skill.SkillBase.Type, this.PkmBase.Type_2);
-        
+
         var damageDetails = new DamageDetails(){
             TypeEffectiveness = effectiveness,
             Critical = critical,
             isFainted = false
         };
 
-        float attack = (skill.SkillBase.IsSpecial) ? attacker.SuperAttack : attacker.Attack;
-        float defense = (skill.SkillBase.IsSpecial) ? attacker.SuperDefense : attacker.Defense;
+        float attack = (skill.SkillBase.Category == SkillCategory.SPECIAL) ? attacker.SuperAttack : attacker.Attack;
+        float defense = (skill.SkillBase.Category == SkillCategory.SPECIAL) ? attacker.SuperDefense : attacker.Defense;
 
         float modifiers = Random.Range(0.85f, 1f) * effectiveness * critical;
         float a = (2 * attacker.Level + 10) / 250f;
         float d = a * skill.SkillBase.Power * ((float)attack / defense) + 2;
-        
+
         int damage = Mathf.FloorToInt(d * modifiers);
 
         HP -= damage;

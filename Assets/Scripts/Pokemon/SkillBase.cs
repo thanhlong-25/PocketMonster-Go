@@ -12,6 +12,9 @@ public class SkillBase : ScriptableObject {
    [SerializeField] int accuracy; // chính xác
    [SerializeField] int timesCanUse; // số lượt dùng
    [SerializeField] SkillAnimationBase skillAnimationBase;
+   [SerializeField] SkillCategory category;
+   [SerializeField] SkillEffect effect;
+   [SerializeField] SkillTarget target;
 
     public string Name {
         get { return name; }
@@ -41,19 +44,41 @@ public class SkillBase : ScriptableObject {
         get { return skillAnimationBase; }
     }
 
-    public bool IsSpecial {
-        get {
-            if (type == PokemonType.FIRE
-                || type == PokemonType.WATER
-                || type == PokemonType.GRASS
-                || type == PokemonType.DRAGON
-                || type == PokemonType.ICE
-                || type == PokemonType.ELECTRIC
-            ) {
-                return true;
-            }
-
-            return false;
-        }
+    public SkillCategory Category {
+        get { return category; }
     }
+
+    public SkillEffect Effect {
+        get { return effect; }
+    }
+
+    public SkillTarget Target {
+        get { return target; }
+    }
+}
+
+public enum SkillCategory {
+    PHYSICAL,
+    SPECIAL,
+    STATUS
+}
+
+public enum SkillTarget {
+    FOE,
+    SELF
+}
+
+[System.Serializable]
+public class SkillEffect {
+    [SerializeField] List<StatBoost> boosts;
+
+    public List<StatBoost> Boosts {
+        get { return boosts; }
+    }
+}
+
+[System.Serializable]
+public class StatBoost {
+    public Stat stat;
+    public int boost;
 }
