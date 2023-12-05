@@ -5,18 +5,17 @@ using UnityEngine;
 
 public enum BattleState {
     START,
-    PLAYER_ACTION,
-    PLAYER_SKILL,
-    ENEMY_SKILL,
+    ACTION_SELECTION,
+    SKILL_SELECTION,
+    PERFORM_SKILL,
     BUSY,
-    PARTY_SCREEN
+    PARTY_SCREEN,
+    BATTLE_OVER
 }
 
 public class BattleSystem : MonoBehaviour {
     [SerializeField] BattleUnit playerUnit;
     [SerializeField] BattleUnit enemyUnit;
-    [SerializeField] BattleHud playerHud;
-    [SerializeField] BattleHud enemyHud;
     [SerializeField] BattleDialogBox dialogBox;
     [SerializeField] PartyScreen partyScreen;
 
@@ -41,86 +40,39 @@ public class BattleSystem : MonoBehaviour {
     public IEnumerator SetupBattle() {
         playerUnit.Setup(playerParty.GetHealthyPokemon());
         enemyUnit.Setup(wildPokemon);
-        playerHud.setData(playerUnit.Pkm);
-        enemyHud.setData(enemyUnit.Pkm);
         dialogBox.SetSkillName(playerUnit.Pkm.Skills);
-
         partyScreen.Init();
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pkm.PkmBase.Name} appeared !!!");
-
-        PlayerAction();
+        PlayerActionSelection();
     }
 
-    void PlayerAction() {
-        state = BattleState.PLAYER_ACTION;
+    void PlayerActionSelection() {
+        state = BattleState.ACTION_SELECTION;
         dialogBox.SetDialog("Choose an action !!!");
         dialogBox.EnabledActionSelector(true);
     }
 
-    IEnumerator PerformPlayerSkill() {
-        state = BattleState.BUSY;
-
+    IEnumerator PlayerSkill() {
+        state = BattleState.PERFORM_SKILL;
         var skill = playerUnit.Pkm.Skills[currentSkill];
-        skill.timesCanUse--;
-        yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
+        yield return RunSkill(playerUnit, enemyUnit, skill, playerUnit.IsPlayerUnit);
 
-        playerUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-        enemyUnit.PlayHitAnimation();
-
-        StartCoroutine(playerSkillAnimation.PlaySkillAnimation(playerUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
-        yield return new WaitForSeconds(1f);
-
-        var damageDetails = enemyUnit.Pkm.TakeDamage(skill, playerUnit.Pkm);
-        yield return enemyHud.UpdateHPBar();
-        yield return ShowDamageDetails(damageDetails);
-
-        yield return new WaitForSeconds(1f);
-        if(damageDetails.isFainted) {
-            yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} fainted");
-            enemyUnit.PlayFaintedAnimation();
-
-            yield return new WaitForSeconds(2f);
-            OnBattleOver(true);
-        } else {
-            StartCoroutine(EnemyMove());
+        // If the battle state was not changed by RunMove, then go to next step
+        if(state == BattleState.PERFORM_SKILL) {
+            StartCoroutine(EnemySkill());
         }
+
     }
 
-    IEnumerator EnemyMove(){
-        state = BattleState.ENEMY_SKILL;
-
+    IEnumerator EnemySkill(){
+        state = BattleState.PERFORM_SKILL;
         var skill = enemyUnit.Pkm.GetRandomSkill();
-        skill.timesCanUse--;
-        yield return dialogBox.TypeDialog($"{enemyUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
-
-        enemyUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-        playerUnit.PlayHitAnimation();
-
-        StartCoroutine(enemySkillAnimation.PlaySkillAnimation(enemyUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
-        yield return new WaitForSeconds(0.5f);
-
-        var damageDetails = playerUnit.Pkm.TakeDamage(skill, enemyUnit.Pkm);
-        yield return playerHud.UpdateHPBar();
-        yield return ShowDamageDetails(damageDetails);
-
-        yield return new WaitForSeconds(1f);
-        if(damageDetails.isFainted) {
-            yield return dialogBox.TypeDialog($"{playerUnit.Pkm.PkmBase.Name} fainted");
-            playerUnit.PlayFaintedAnimation();
-
-            yield return new WaitForSeconds(2f);
-
-            var nextPokemon = playerParty.GetHealthyPokemon();
-            if(nextPokemon != null) {
-                OpenPartyScreen();
-            } else {
-                OnBattleOver(false);
-            }
-        } else {
-            PlayerAction();
+        yield return RunSkill(enemyUnit, playerUnit, skill, enemyUnit.IsPlayerUnit);
+        
+        // If the battle state was not changed by RunMove, then go to next step
+        if(state == BattleState.PERFORM_SKILL) {
+            PlayerActionSelection();
         }
     }
 
@@ -137,16 +89,16 @@ public class BattleSystem : MonoBehaviour {
     }
 
     void PlayerMove() {
-        state = BattleState.PLAYER_SKILL;
+        state = BattleState.SKILL_SELECTION;
         dialogBox.EnabledActionSelector(false);
         dialogBox.EnabledDialogText(false);
         dialogBox.EnabledSkillSelector(true);
     }
 
     public void HandleUpdate() {
-        if (state == BattleState.PLAYER_ACTION) {
+        if (state == BattleState.ACTION_SELECTION) {
             HandleActionSelection();
-        } else if (state == BattleState.PLAYER_SKILL) {
+        } else if (state == BattleState.SKILL_SELECTION) {
             HandleSkillSelection();
         } else if (state == BattleState.PARTY_SCREEN) {
             HandlePartyMemberSelection();
@@ -200,11 +152,11 @@ public class BattleSystem : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Z)) {
             dialogBox.EnabledSkillSelector(false);
             dialogBox.EnabledDialogText(true);
-            StartCoroutine(PerformPlayerSkill());
+            StartCoroutine(PlayerSkill());
         } else if (Input.GetKeyDown(KeyCode.X)) { // Cancel
             dialogBox.EnabledSkillSelector(false);
             dialogBox.EnabledDialogText(true);
-            PlayerAction();
+            PlayerActionSelection();
         }
     }
 
@@ -245,7 +197,7 @@ public class BattleSystem : MonoBehaviour {
 
         } else if (Input.GetKeyDown(KeyCode.X)) {
             partyScreen.gameObject.SetActive(false);
-            PlayerAction();
+            PlayerActionSelection();
         }
     }
 
@@ -259,12 +211,55 @@ public class BattleSystem : MonoBehaviour {
         }
 
         playerUnit.Setup(newPokemon);
-        playerHud.setData(newPokemon);
         dialogBox.SetSkillName(newPokemon.Skills);
 
         yield return dialogBox.TypeDialog($"Go {newPokemon.PkmBase.Name} !!!");
 
-        StartCoroutine(EnemyMove());
+        StartCoroutine(EnemySkill());
+    }
+
+    IEnumerator RunSkill(BattleUnit sourceUnit, BattleUnit targetUnit, Skill skill, bool isPlayerUnit) {
+        skill.timesCanUse--;
+        yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
+
+        sourceUnit.PlayAttackAnimation();
+        yield return new WaitForSeconds(1f);
+        targetUnit.PlayHitAnimation();
+
+        if(isPlayerUnit) StartCoroutine(playerSkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+        if(!isPlayerUnit) StartCoroutine(enemySkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+        yield return new WaitForSeconds(1f);
+
+        var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
+        yield return targetUnit.Hud.UpdateHPBar();
+        yield return ShowDamageDetails(damageDetails);
+
+        yield return new WaitForSeconds(1f);
+        if(damageDetails.isFainted) {
+            yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} fainted");
+            targetUnit.PlayFaintedAnimation();
+
+            yield return new WaitForSeconds(2f);
+            CheckForBattleOver(targetUnit);
+        }
+    }
+
+    void CheckForBattleOver(bool isPlayerUnit) {
+        if(isPlayerUnit) {
+            var nextPokemon = playerParty.GetHealthyPokemon();
+            if(nextPokemon != null) {
+                OpenPartyScreen();
+            } else {
+                BattleOver(false);
+            }
+        } else  {
+            BattleOver(true);
+        }
+    }
+
+    void BattleOver(bool isWon) {
+        state = BattleState.BATTLE_OVER;
+        OnBattleOver(isWon);
     }
 
 }

@@ -5,11 +5,19 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 public class BattleUnit : MonoBehaviour {
-    [SerializeField] PokemonBase pkmBase;
-    [SerializeField] int level;
+    [SerializeField] BattleHud hud;
     [SerializeField] bool isPlayerUnit;
 
     public Pokemon Pkm { get; set; }
+
+    public bool IsPlayerUnit { 
+        get { return isPlayerUnit; }
+    }
+
+    public BattleHud Hud { 
+        get { return hud; }
+    }
+
     Vector3 originPos;
     Color originColor;
     Image image;
@@ -29,6 +37,7 @@ public class BattleUnit : MonoBehaviour {
             image.sprite = Pkm.PkmBase.FrontSprite;
         }
 
+        hud.setData(pokemon);
         image.color = originColor;
         PlayerEnterAnimation();
     }
