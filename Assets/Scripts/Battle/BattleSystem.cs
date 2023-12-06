@@ -230,12 +230,24 @@ public class BattleSystem : MonoBehaviour {
         if(!isPlayerUnit) StartCoroutine(enemySkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
         yield return new WaitForSeconds(1f);
 
-        var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
-        yield return targetUnit.Hud.UpdateHPBar();
-        yield return ShowDamageDetails(damageDetails);
+        if(skill.SkillBase.Category == SkillCategory.STATUS) {
+            var effects = skill.SkillBase.Effect;
+            if(effects.Boosts != null) {
+                if(skill.SkillBase.Target == SkillTarget.SELF) {
+                    sourceUnit.Pkm.ApplyBoosts(effects.Boosts);
+                } else {
+                    targetUnit.Pkm.ApplyBoosts(effects.Boosts);
+                }
+            }
+        } else {
+            var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
+            yield return targetUnit.Hud.UpdateHPBar();
+            yield return ShowDamageDetails(damageDetails);
+            yield return new WaitForSeconds(1f);
+        }
 
-        yield return new WaitForSeconds(1f);
-        if(damageDetails.isFainted) {
+        if(targetUnit.Pkm.HP <= 0) {
+        //if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} fainted");
             targetUnit.PlayFaintedAnimation();
 

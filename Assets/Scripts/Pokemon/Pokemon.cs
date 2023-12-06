@@ -21,7 +21,7 @@ public class Pokemon {
     public List<Skill> Skills { get; set; }
     public int HP { get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
-    public Dictionary<Stat, int> StatsBoost { get; private set; }
+    public Dictionary<Stat, int> StatBoosts { get; private set; }
 
     public void Init() {
         // generate skill
@@ -36,7 +36,7 @@ public class Pokemon {
             CalculateStats();
             HP = MaxHp;
 
-            StatsBoost = new Dictionary<Stat, int>() {
+            StatBoosts = new Dictionary<Stat, int>() {
                 {Stat.ATTACK, 0},
                 {Stat.DEFENSE, 0},
                 {Stat.SUPER_ATTACK, 0},
@@ -61,7 +61,7 @@ public class Pokemon {
         int value =  Stats[stat];
 
         //Apply boost
-        int boost = StatsBoost[stat];
+        int boost = StatBoosts[stat];
         var boostVal = new float[] { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
         if(boost >= 0) {
             value = Mathf.FloorToInt(value * boostVal[boost]);
@@ -70,6 +70,17 @@ public class Pokemon {
         }
 
         return value;
+    }
+
+    public void ApplyBoosts(List<StatBoost> statBoosts) {
+        foreach (var statBoost in statBoosts) {
+            var stat = statBoost.stat;
+            var boost = statBoost.boost;
+
+            StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
+
+            Debug.Log($"{stat} has been boosted to {StatBoosts[stat]}");
+        }
     }
 
     public int Attack {
