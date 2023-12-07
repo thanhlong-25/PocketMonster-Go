@@ -28,10 +28,11 @@ public class BattleHud : MonoBehaviour {
       }
 
       public IEnumerator UpdateHPBar() {
-            IEnumerator smoothHP = hpBar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHp);
-            StartCoroutine(smoothHP);
-
-            yield return StartCoroutine(UpdateHpText());
+            if(_pokemon.HpChanged) {
+                  IEnumerator smoothHP = hpBar.SetHPSmooth((float)_pokemon.HP / _pokemon.MaxHp);
+                  StartCoroutine(smoothHP);
+                  yield return StartCoroutine(UpdateHpText());
+            }
       }
 
       public IEnumerator UpdateHpText() {

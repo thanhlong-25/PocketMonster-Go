@@ -233,6 +233,13 @@ public class BattleSystem : MonoBehaviour {
     }
 
     IEnumerator RunSkill(BattleUnit sourceUnit, BattleUnit targetUnit, Skill skill, bool isPlayerUnit) {
+        bool isCanSkill = sourceUnit.Pkm.OnBeforeSkill();
+        if(!isCanSkill) {
+            yield return ShowStatusChanges(sourceUnit.Pkm);
+            yield break;
+        }
+        
+        yield return ShowStatusChanges(sourceUnit.Pkm);
         skill.timesCanUse--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
@@ -257,9 +264,21 @@ public class BattleSystem : MonoBehaviour {
         //if(damageDetails.isFainted) {
             yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} fainted");
             targetUnit.PlayFaintedAnimation();
-
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetUnit);
+        }
+
+        // vì sao lại là sourceUnit -> Kiểu handle sau khi mày xài skill, nếu đang burn thì sẽ bị đốt
+        sourceUnit.Pkm.OnAfterTurn();
+        yield return ShowStatusChanges(sourceUnit.Pkm);
+        yield return sourceUnit.Hud.UpdateHPBar();
+
+        if(sourceUnit.Pkm.HP <= 0) {
+        //if(damageDetails.isFainted) {
+            yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} fainted");
+            sourceUnit.PlayFaintedAnimation();
+            yield return new WaitForSeconds(2f);
+            CheckForBattleOver(sourceUnit);
         }
     }
 

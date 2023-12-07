@@ -24,6 +24,8 @@ public class Pokemon {
     public Dictionary<Stat, int> StatBoosts { get; private set; }
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
     public Condition Status { get; private set; }
+    public int StatusTime { get; set; }
+    public bool HpChanged { get; set; }
 
     public void Init() {
         // generate skill
@@ -135,23 +137,38 @@ public class Pokemon {
         float d = a * skill.SkillBase.Power * ((float)attack / defense) + 2;
 
         int damage = Mathf.FloorToInt(d * modifiers);
+        UpdateHP(damage);
 
-        HP -= damage;
-        if(HP <= 0) {
-            HP = 0;
-            damageDetails.isFainted = true;
-        }
         return damageDetails;
+    }
+
+    public void UpdateHP(int damage) {
+        HP = Mathf.Clamp(HP - damage, 0, MaxHp);
+        HpChanged = true;
     }
 
     public void SetStatus(ConditionID conditionId) {
         Status = ConditionsDB.Conditions[conditionId];
+        Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{PkmBase.Name} {Status.StartMessage}");
+    }
+
+    public void CureStatus() {
+        Status = null;
     }
 
     public Skill GetRandomSkill() {
         int r = Random.Range(0, Skills.Count);
         return Skills[r];
+    }
+
+    public bool OnBeforeSkill() {
+        if(Status?.OnBeforeSkill != null) return Status.OnBeforeSkill(this);
+        return true;
+    }
+
+    public void OnAfterTurn() {
+        Status?.OnAfterTurn?.Invoke(this);
     }
 
     public void OnBattleOver() {

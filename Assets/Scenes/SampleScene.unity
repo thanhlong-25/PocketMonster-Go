@@ -29570,7 +29570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemons:
   - _PkmBase: {fileID: 11400000, guid: 307e97407921a364ab745bfa290a7daa, type: 2}
-    _level: 15
+    _level: 150
   - _PkmBase: {fileID: 11400000, guid: e96d7605872a9e24d9802cdde1fd520b, type: 2}
     _level: 20
 --- !u!1 &2063297801
