@@ -44,7 +44,6 @@ public class BattleSystem : MonoBehaviour {
         partyScreen.Init();
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pkm.PkmBase.Name} appeared !!!");
-        //PlayerActionSelection();
         ChooseFirstTurn();
     }
 
@@ -78,7 +77,7 @@ public class BattleSystem : MonoBehaviour {
         state = BattleState.PERFORM_SKILL;
         var skill = enemyUnit.Pkm.GetRandomSkill();
         yield return RunSkill(enemyUnit, playerUnit, skill, enemyUnit.IsPlayerUnit);
-        
+
         // If the battle state was not changed by RunMove, then go to next step
         if(state == BattleState.PERFORM_SKILL) {
             PlayerActionSelection();
@@ -219,7 +218,7 @@ public class BattleSystem : MonoBehaviour {
             playerUnit.PlayFaintedAnimation();
 
             yield return new WaitForSeconds(2f);
-        } 
+        }
 
         playerUnit.Setup(newPokemon);
         dialogBox.SetSkillName(newPokemon.Skills);
@@ -238,7 +237,7 @@ public class BattleSystem : MonoBehaviour {
             yield return ShowStatusChanges(sourceUnit.Pkm);
             yield break;
         }
-        
+
         yield return ShowStatusChanges(sourceUnit.Pkm);
         skill.timesCanUse--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");

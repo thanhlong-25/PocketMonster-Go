@@ -16,6 +16,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] SkillEffect effect;
    [SerializeField] SkillTarget target;
 
+
     public string Name {
         get { return name; }
     }
@@ -57,17 +58,6 @@ public class SkillBase : ScriptableObject {
     }
 }
 
-public enum SkillCategory {
-    PHYSICAL,
-    SPECIAL,
-    STATUS
-}
-
-public enum SkillTarget {
-    FOE,
-    SELF
-}
-
 [System.Serializable]
 public class SkillEffect {
     [SerializeField] List<StatBoost> boosts;
@@ -81,6 +71,18 @@ public class SkillEffect {
         get { return status; }
     }
 }
+
+public enum SkillCategory {
+    PHYSICAL,
+    SPECIAL,
+    STATUS
+}
+
+public enum SkillTarget {
+    FOE,
+    SELF
+}
+
 
 [System.Serializable]
 public class StatBoost {

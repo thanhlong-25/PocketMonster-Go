@@ -20,8 +20,10 @@ public class Pokemon {
 
     public List<Skill> Skills { get; set; }
     public int HP { get; set; }
+
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
+
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
     public Condition Status { get; private set; }
     public int StatusTime { get; set; }
@@ -31,15 +33,12 @@ public class Pokemon {
         // generate skill
         Skills = new List<Skill>();
         foreach (var act in PkmBase.LearnableSkills) {
-            if (act.Level <= Level) {
-                Skills.Add(new Skill(act.Base));
-            }
-
+            if (act.Level <= Level) Skills.Add(new Skill(act.Base));
             if(Skills.Count >= 4) break;
 
             CalculateStats();
             HP = MaxHp;
-            ResetStatBoosts();  
+            ResetStatBoosts();
         }
     }
 
@@ -51,17 +50,17 @@ public class Pokemon {
         Stats.Add(Stat.SUPER_DEFENSE, Mathf.FloorToInt((PkmBase.SuperDefense * Level) / 100f) + 5);
         Stats.Add(Stat.SPEED, Mathf.FloorToInt((PkmBase.Speed * Level) / 100f) + 5);
 
-        MaxHp = Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10;
+        MaxHp = Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10 + Level;
     }
 
     void ResetStatBoosts() {
         StatBoosts = new Dictionary<Stat, int>() {
-                {Stat.ATTACK, 0},
-                {Stat.DEFENSE, 0},
-                {Stat.SUPER_ATTACK, 0},
-                {Stat.SUPER_DEFENSE, 0},
-                {Stat.SPEED, 0}
-            };
+            {Stat.ATTACK, 0},
+            {Stat.DEFENSE, 0},
+            {Stat.SUPER_ATTACK, 0},
+            {Stat.SUPER_DEFENSE, 0},
+            {Stat.SPEED, 0}
+        };
     }
 
     int GetStat(Stat stat) {
@@ -75,7 +74,6 @@ public class Pokemon {
         } else {
             value = Mathf.FloorToInt(value / boostVal[-boost]);
         }
-
         return value;
     }
 
@@ -148,6 +146,7 @@ public class Pokemon {
     }
 
     public void SetStatus(ConditionID conditionId) {
+        if(Status != null) return;
         Status = ConditionsDB.Conditions[conditionId];
         Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{PkmBase.Name} {Status.StartMessage}");
