@@ -22,6 +22,8 @@ public class Pokemon {
     public int HP { get; set; }
     public Dictionary<Stat, int> Stats { get; private set; }
     public Dictionary<Stat, int> StatBoosts { get; private set; }
+    public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
+    public Condition Status { get; private set; }
 
     public void Init() {
         // generate skill
@@ -35,14 +37,7 @@ public class Pokemon {
 
             CalculateStats();
             HP = MaxHp;
-
-            StatBoosts = new Dictionary<Stat, int>() {
-                {Stat.ATTACK, 0},
-                {Stat.DEFENSE, 0},
-                {Stat.SUPER_ATTACK, 0},
-                {Stat.SUPER_DEFENSE, 0},
-                {Stat.SPEED, 0}
-            };
+            ResetStatBoosts();  
         }
     }
 
@@ -55,6 +50,16 @@ public class Pokemon {
         Stats.Add(Stat.SPEED, Mathf.FloorToInt((PkmBase.Speed * Level) / 100f) + 5);
 
         MaxHp = Mathf.FloorToInt((PkmBase.MaxHp * Level) / 100f) + 10;
+    }
+
+    void ResetStatBoosts() {
+        StatBoosts = new Dictionary<Stat, int>() {
+                {Stat.ATTACK, 0},
+                {Stat.DEFENSE, 0},
+                {Stat.SUPER_ATTACK, 0},
+                {Stat.SUPER_DEFENSE, 0},
+                {Stat.SPEED, 0}
+            };
     }
 
     int GetStat(Stat stat) {
@@ -77,9 +82,12 @@ public class Pokemon {
             var stat = statBoost.stat;
             var boost = statBoost.boost;
 
+            if(boost > 0) {
+                StatusChanges.Enqueue($"{PkmBase.Name}'s {stat} raise !!!");
+            } else {
+                StatusChanges.Enqueue($"{PkmBase.Name}'s {stat} fell !!!");
+            }
             StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
-
-            Debug.Log($"{stat} has been boosted to {StatBoosts[stat]}");
         }
     }
 
@@ -136,9 +144,18 @@ public class Pokemon {
         return damageDetails;
     }
 
+    public void SetStatus(ConditionID conditionId) {
+        Status = ConditionsDB.Conditions[conditionId];
+        StatusChanges.Enqueue($"{PkmBase.Name} {Status.StartMessage}");
+    }
+
     public Skill GetRandomSkill() {
         int r = Random.Range(0, Skills.Count);
         return Skills[r];
+    }
+
+    public void OnBattleOver() {
+        ResetStatBoosts();
     }
 }
 

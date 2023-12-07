@@ -19,3 +19,7 @@ MonoBehaviour:
   accuracy: 75
   timesCanUse: 10
   skillAnimationBase: {fileID: 11400000, guid: 45bfc1f39f9ea724faa19af4cb387194, type: 2}
+  category: 0
+  effect:
+    boosts: []
+  target: 1

@@ -71,9 +71,14 @@ public enum SkillTarget {
 [System.Serializable]
 public class SkillEffect {
     [SerializeField] List<StatBoost> boosts;
+    [SerializeField] ConditionID status;
 
     public List<StatBoost> Boosts {
         get { return boosts; }
+    }
+
+    public ConditionID Status {
+        get { return status; }
     }
 }
 

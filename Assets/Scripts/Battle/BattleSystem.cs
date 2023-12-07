@@ -44,7 +44,16 @@ public class BattleSystem : MonoBehaviour {
         partyScreen.Init();
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pkm.PkmBase.Name} appeared !!!");
-        PlayerActionSelection();
+        //PlayerActionSelection();
+        ChooseFirstTurn();
+    }
+
+    void ChooseFirstTurn() {
+        if(playerUnit.Pkm.Speed >= enemyUnit.Pkm.Speed) {
+            PlayerActionSelection();
+        } else {
+            StartCoroutine(EnemySkill());
+        }
     }
 
     void PlayerActionSelection() {
@@ -203,19 +212,24 @@ public class BattleSystem : MonoBehaviour {
 
     IEnumerator SwitchPokemon(Pokemon newPokemon) {
         dialogBox.EnabledActionSelector(false);
+        bool currentPokemonFainted = true;
         if(playerUnit.Pkm.HP > 0) {
+            currentPokemonFainted = false;
             yield return dialogBox.TypeDialog($"Come back {playerUnit.Pkm.PkmBase.Name} !!!");
             playerUnit.PlayFaintedAnimation();
 
             yield return new WaitForSeconds(2f);
-        }
+        } 
 
         playerUnit.Setup(newPokemon);
         dialogBox.SetSkillName(newPokemon.Skills);
-
         yield return dialogBox.TypeDialog($"Go {newPokemon.PkmBase.Name} !!!");
 
-        StartCoroutine(EnemySkill());
+        if(currentPokemonFainted) {
+            ChooseFirstTurn();
+        } else {
+            StartCoroutine(EnemySkill());
+        }
     }
 
     IEnumerator RunSkill(BattleUnit sourceUnit, BattleUnit targetUnit, Skill skill, bool isPlayerUnit) {
@@ -231,14 +245,7 @@ public class BattleSystem : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         if(skill.SkillBase.Category == SkillCategory.STATUS) {
-            var effects = skill.SkillBase.Effect;
-            if(effects.Boosts != null) {
-                if(skill.SkillBase.Target == SkillTarget.SELF) {
-                    sourceUnit.Pkm.ApplyBoosts(effects.Boosts);
-                } else {
-                    targetUnit.Pkm.ApplyBoosts(effects.Boosts);
-                }
-            }
+            yield return RunSkillEffect(skill, sourceUnit.Pkm, targetUnit.Pkm);
         } else {
             var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
             yield return targetUnit.Hud.UpdateHPBar();
@@ -253,6 +260,34 @@ public class BattleSystem : MonoBehaviour {
 
             yield return new WaitForSeconds(2f);
             CheckForBattleOver(targetUnit);
+        }
+    }
+
+    IEnumerator RunSkillEffect(Skill skill, Pokemon source, Pokemon target) {
+        var effects = skill.SkillBase.Effect;
+
+        // Stat Boosting
+        if(effects.Boosts != null) {
+            if(skill.SkillBase.Target == SkillTarget.SELF) {
+                source.ApplyBoosts(effects.Boosts);
+            } else {
+                target.ApplyBoosts(effects.Boosts);
+            }
+        }
+
+        // Status Condition
+        if(effects.Status != ConditionID.none) {
+            target.SetStatus(effects.Status);
+        }
+
+        yield return ShowStatusChanges(source);
+        yield return ShowStatusChanges(target);
+    }
+
+    IEnumerator ShowStatusChanges(Pokemon pokemon) {
+        while (pokemon.StatusChanges.Count > 0) {
+            var message = pokemon.StatusChanges.Dequeue();
+            yield return dialogBox.TypeDialog(message);
         }
     }
 
@@ -271,6 +306,7 @@ public class BattleSystem : MonoBehaviour {
 
     void BattleOver(bool isWon) {
         state = BattleState.BATTLE_OVER;
+        playerParty.Pokemons.ForEach(p => p.OnBattleOver());
         OnBattleOver(isWon);
     }
 
