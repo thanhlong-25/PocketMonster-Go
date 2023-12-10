@@ -131,7 +131,9 @@ public enum Stat {
     DEFENSE,
     SUPER_ATTACK,
     SUPER_DEFENSE,
-    SPEED
+    SPEED,
+    ACCURACY,
+    EVASION
 }
 
 

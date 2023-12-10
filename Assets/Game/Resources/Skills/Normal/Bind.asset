@@ -18,9 +18,10 @@ MonoBehaviour:
   power: 15
   accuracy: 85
   timesCanUse: 20
-  skillAnimationBase: {fileID: 11400000, guid: 5affe214111500d4b9b3da7960a1c473, type: 2}
+  skillAnimationBase: {fileID: 11400000, guid: f3217681b53c7cb42925b1fdc8979f42, type: 2}
   category: 2
   effect:
     boosts: []
-    status: 5
+    status: 0
+    volatileStatus: 6
   target: 0

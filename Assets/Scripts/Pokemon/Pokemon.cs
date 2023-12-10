@@ -27,7 +27,12 @@ public class Pokemon {
     public Queue<string> StatusChanges { get; private set; } = new Queue<string>();
     public Condition Status { get; private set; }
     public int StatusTime { get; set; }
+
+    public Condition VolatileStatus { get; private set; }
+    public int VolatileStatusTime { get; set; }
+
     public bool HpChanged { get; set; }
+    public event System.Action OnStatusChanged;
 
     public void Init() {
         // generate skill
@@ -39,6 +44,8 @@ public class Pokemon {
             CalculateStats();
             HP = MaxHp;
             ResetStatBoosts();
+            Status = null;
+            VolatileStatus = null;
         }
     }
 
@@ -59,7 +66,9 @@ public class Pokemon {
             {Stat.DEFENSE, 0},
             {Stat.SUPER_ATTACK, 0},
             {Stat.SUPER_DEFENSE, 0},
-            {Stat.SPEED, 0}
+            {Stat.SPEED, 0},
+            {Stat.ACCURACY, 0},
+            {Stat.EVASION, 0},
         };
     }
 
@@ -150,10 +159,23 @@ public class Pokemon {
         Status = ConditionsDB.Conditions[conditionId];
         Status?.OnStart?.Invoke(this);
         StatusChanges.Enqueue($"{PkmBase.Name} {Status.StartMessage}");
+        OnStatusChanged?.Invoke();
     }
 
     public void CureStatus() {
         Status = null;
+        OnStatusChanged?.Invoke();
+    }
+
+     public void SetVolatileStatus(ConditionID conditionId) {
+        if(VolatileStatus != null) return;
+        VolatileStatus = ConditionsDB.Conditions[conditionId];
+        VolatileStatus?.OnStart?.Invoke(this);
+        StatusChanges.Enqueue($"{PkmBase.Name} {VolatileStatus.StartMessage}");
+    }
+
+    public void CureVolatileStatus() {
+        VolatileStatus = null;
     }
 
     public Skill GetRandomSkill() {
@@ -162,15 +184,24 @@ public class Pokemon {
     }
 
     public bool OnBeforeSkill() {
-        if(Status?.OnBeforeSkill != null) return Status.OnBeforeSkill(this);
-        return true;
+        bool canPerformSkill = true;
+        if(Status?.OnBeforeSkill != null) {
+            if(!Status.OnBeforeSkill(this)) canPerformSkill = false;
+        }
+
+        if(VolatileStatus?.OnBeforeSkill != null) {
+            if(!VolatileStatus.OnBeforeSkill(this)) canPerformSkill = false;
+        }
+        return canPerformSkill;
     }
 
     public void OnAfterTurn() {
         Status?.OnAfterTurn?.Invoke(this);
+        VolatileStatus?.OnAfterTurn?.Invoke(this);
     }
 
     public void OnBattleOver() {
+        VolatileStatus = null;
         ResetStatBoosts();
     }
 }

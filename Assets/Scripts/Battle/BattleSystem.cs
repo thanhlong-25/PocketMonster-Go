@@ -235,6 +235,7 @@ public class BattleSystem : MonoBehaviour {
         bool isCanSkill = sourceUnit.Pkm.OnBeforeSkill();
         if(!isCanSkill) {
             yield return ShowStatusChanges(sourceUnit.Pkm);
+            yield return sourceUnit.Hud.UpdateHPBar();
             yield break;
         }
 
@@ -298,6 +299,11 @@ public class BattleSystem : MonoBehaviour {
             target.SetStatus(effects.Status);
         }
 
+        // Status Condition
+        if(effects.VolatileStatus != ConditionID.none) {
+            target.SetVolatileStatus(effects.VolatileStatus);
+        }
+
         yield return ShowStatusChanges(source);
         yield return ShowStatusChanges(target);
     }
@@ -320,6 +326,29 @@ public class BattleSystem : MonoBehaviour {
         } else  {
             BattleOver(true);
         }
+    }
+
+    bool CheckIfSkillHits(Skill skill, Pokemon sourceUnit, Pokemon targetUnit) {
+        if(skill.SkillBase.alwaysHits) return true;
+
+        float skillAccuracy = skill.SkillBase.Accuracy;
+        int accuracy = sourceUnit.StatBoosts[Stat.ACCURACY];
+        int evasion = targetUnit.StatBoosts[Stat.EVASION];
+        var boostValues = new float[]  { 1f, 4f / 3f, 5f / 3f, 2f, 7f / 3f, 8f / 3f, 3f };
+
+        if(accuracy > 0) {
+            skillAccuracy *= boostValues[accuracy];
+        } else {
+            skillAccuracy /= boostValues[-accuracy];
+        }
+
+         if(evasion > 0) {
+            skillAccuracy /= boostValues[evasion];
+        } else {
+            skillAccuracy *= boostValues[-evasion];
+        }
+
+        return Engine.Random.Range(1, 101) <= skillAccuracy;
     }
 
     void BattleOver(bool isWon) {

@@ -13,6 +13,10 @@ public class MainController : MonoBehaviour {
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
 
+    private void Awake() {
+        ConditionsDB.Init();
+    }
+
     private void Start() {
         playerController.OnEncoutered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;

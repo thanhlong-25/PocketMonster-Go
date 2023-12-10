@@ -10,6 +10,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] PokemonType type;
    [SerializeField] int power;
    [SerializeField] int accuracy; // chính xác
+   [SerializeField] bool alwaysHits; // chính xác
    [SerializeField] int timesCanUse; // số lượt dùng
    [SerializeField] SkillAnimationBase skillAnimationBase;
    [SerializeField] SkillCategory category;
@@ -41,6 +42,10 @@ public class SkillBase : ScriptableObject {
         get { return timesCanUse; }
     }
 
+    public bool AlwaysHit {
+        get { return alwaysHits; }
+    }
+
     public SkillAnimationBase SkillAnimationBase {
         get { return skillAnimationBase; }
     }
@@ -62,6 +67,7 @@ public class SkillBase : ScriptableObject {
 public class SkillEffect {
     [SerializeField] List<StatBoost> boosts;
     [SerializeField] ConditionID status;
+    [SerializeField] ConditionID volatileStatus;
 
     public List<StatBoost> Boosts {
         get { return boosts; }
@@ -69,6 +75,10 @@ public class SkillEffect {
 
     public ConditionID Status {
         get { return status; }
+    }
+
+    public ConditionID VolatileStatus {
+        get { return volatileStatus; }
     }
 }
 

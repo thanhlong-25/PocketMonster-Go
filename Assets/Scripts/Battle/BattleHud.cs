@@ -6,8 +6,18 @@ using UnityEngine.UI;
 public class BattleHud : MonoBehaviour {
       [SerializeField] Text nameText;
       [SerializeField] Text levelText;
+      [SerializeField] Text statusText;
       [SerializeField] HpBar hpBar;
       [SerializeField] Text hpText;
+      [SerializeField] Color psnColor;
+      [SerializeField] Color parColor;
+      [SerializeField] Color slpColor;
+      [SerializeField] Color brnColor;
+      [SerializeField] Color frzColor;
+      [SerializeField] Color cfsColor;
+
+      Dictionary<ConditionID, Color> statusColors;
+
       Pokemon _pokemon;
 
       public void setData(Pokemon pokemon) {
@@ -16,6 +26,17 @@ public class BattleHud : MonoBehaviour {
             levelText.text = "Lv." + pokemon.Level;
             hpBar.SetHP((float) pokemon.HP / pokemon.MaxHp);
             hpText.text = $"{pokemon.HP} / {pokemon.MaxHp}";
+
+            statusColors = new Dictionary<ConditionID, Color>() {
+                  {ConditionID.psn, psnColor},
+                  {ConditionID.par, parColor},
+                  {ConditionID.slp, slpColor},
+                  {ConditionID.frz, frzColor},
+                  {ConditionID.brn, brnColor},
+                  {ConditionID.cfs, cfsColor},
+            };
+            SetStatusText();
+            _pokemon.OnStatusChanged += SetStatusText;
       }
 
       public IEnumerator UpdateHPBar() {
@@ -41,6 +62,15 @@ public class BattleHud : MonoBehaviour {
                   else if(damage <= 40) yield return new WaitForSeconds(0.0175f);
                   else yield return new WaitForSeconds(0.00875f);
                   tempHp--;
+            }
+      }
+
+      void SetStatusText() {
+            if(_pokemon.Status == null) {
+                  statusText.text = "";
+            } else {
+                  statusText.text = _pokemon.Status.Id.ToString().ToUpper();
+                  statusText.color = statusColors[_pokemon.Status.Id];
             }
       }
 }
