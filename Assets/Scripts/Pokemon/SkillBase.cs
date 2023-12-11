@@ -10,7 +10,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] PokemonType type;
    [SerializeField] int power;
    [SerializeField] int accuracy; // chính xác
-   [SerializeField] bool alwaysHits; // chính xác
+   [SerializeField] bool alwaysHits;
    [SerializeField] int timesCanUse; // số lượt dùng
    [SerializeField] SkillAnimationBase skillAnimationBase;
    [SerializeField] SkillCategory category;
@@ -42,7 +42,7 @@ public class SkillBase : ScriptableObject {
         get { return timesCanUse; }
     }
 
-    public bool AlwaysHit {
+    public bool AlwaysHits {
         get { return alwaysHits; }
     }
 

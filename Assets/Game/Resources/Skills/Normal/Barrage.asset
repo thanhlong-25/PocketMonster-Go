@@ -17,9 +17,12 @@ MonoBehaviour:
   type: 1
   power: 15
   accuracy: 85
+  alwaysHits: 0
   timesCanUse: 20
   skillAnimationBase: {fileID: 11400000, guid: 47f26fbe828fccc4c982552177ab47c7, type: 2}
   category: 0
   effect:
     boosts: []
+    status: 0
+    volatileStatus: 0
   target: 0

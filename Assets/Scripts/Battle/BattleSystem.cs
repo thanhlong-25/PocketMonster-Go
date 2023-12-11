@@ -243,29 +243,34 @@ public class BattleSystem : MonoBehaviour {
         skill.timesCanUse--;
         yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} use {skill.SkillBase.Name}");
 
-        sourceUnit.PlayAttackAnimation();
-        yield return new WaitForSeconds(1f);
-        targetUnit.PlayHitAnimation();
-
-        if(isPlayerUnit) StartCoroutine(playerSkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
-        if(!isPlayerUnit) StartCoroutine(enemySkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
-        yield return new WaitForSeconds(1f);
-
-        if(skill.SkillBase.Category == SkillCategory.STATUS) {
-            yield return RunSkillEffect(skill, sourceUnit.Pkm, targetUnit.Pkm);
-        } else {
-            var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
-            yield return targetUnit.Hud.UpdateHPBar();
-            yield return ShowDamageDetails(damageDetails);
+        if(CheckIfSkillHits(skill, sourceUnit.Pkm, targetUnit.Pkm)) {
+            // SKill Animation
+            sourceUnit.PlayAttackAnimation();
             yield return new WaitForSeconds(1f);
-        }
+            targetUnit.PlayHitAnimation();
 
-        if(targetUnit.Pkm.HP <= 0) {
-        //if(damageDetails.isFainted) {
-            yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} fainted");
-            targetUnit.PlayFaintedAnimation();
-            yield return new WaitForSeconds(2f);
-            CheckForBattleOver(targetUnit);
+            if(isPlayerUnit) StartCoroutine(playerSkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+            if(!isPlayerUnit) StartCoroutine(enemySkillAnimation.PlaySkillAnimation(sourceUnit.Pkm.Skills[currentSkill].SkillBase.SkillAnimationBase.SkillFrame));
+            yield return new WaitForSeconds(1f);
+
+            if(skill.SkillBase.Category == SkillCategory.STATUS) {
+                yield return RunSkillEffect(skill, sourceUnit.Pkm, targetUnit.Pkm);
+            } else {
+                var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
+                yield return targetUnit.Hud.UpdateHPBar();
+                yield return ShowDamageDetails(damageDetails);
+                yield return new WaitForSeconds(1f);
+            }
+
+            if(targetUnit.Pkm.HP <= 0) {
+            //if(damageDetails.isFainted) {
+                yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} fainted");
+                targetUnit.PlayFaintedAnimation();
+                yield return new WaitForSeconds(2f);
+                CheckForBattleOver(targetUnit);
+            }
+        } else {
+            yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} missed!!!");
         }
 
         // vì sao lại là sourceUnit -> Kiểu handle sau khi mày xài skill, nếu đang burn thì sẽ bị đốt
@@ -329,7 +334,7 @@ public class BattleSystem : MonoBehaviour {
     }
 
     bool CheckIfSkillHits(Skill skill, Pokemon sourceUnit, Pokemon targetUnit) {
-        if(skill.SkillBase.alwaysHits) return true;
+        if(skill.SkillBase.AlwaysHits) return true;
 
         float skillAccuracy = skill.SkillBase.Accuracy;
         int accuracy = sourceUnit.StatBoosts[Stat.ACCURACY];
@@ -348,7 +353,7 @@ public class BattleSystem : MonoBehaviour {
             skillAccuracy *= boostValues[-evasion];
         }
 
-        return Engine.Random.Range(1, 101) <= skillAccuracy;
+        return UnityEngine.Random.Range(1, 101) <= skillAccuracy;
     }
 
     void BattleOver(bool isWon) {
