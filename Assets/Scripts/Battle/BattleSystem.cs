@@ -7,10 +7,17 @@ public enum BattleState {
     START,
     ACTION_SELECTION,
     SKILL_SELECTION,
-    PERFORM_SKILL,
+    RUNNING_TURN,
     BUSY,
     PARTY_SCREEN,
     BATTLE_OVER
+}
+
+public enum BattleAction {
+    SKILL,
+    SWITCH_POKEMON,
+    USE_ITEM,
+    RUN
 }
 
 public class BattleSystem : MonoBehaviour {
@@ -23,6 +30,7 @@ public class BattleSystem : MonoBehaviour {
     [SerializeField] SkillAnimation enemySkillAnimation;
 
     BattleState state;
+    BattleState? prevState;
     int currentAction;
     int currentSkill;
     int currentMember;
@@ -44,14 +52,49 @@ public class BattleSystem : MonoBehaviour {
         partyScreen.Init();
 
         yield return dialogBox.TypeDialog($"A wild {enemyUnit.Pkm.PkmBase.Name} appeared !!!");
-        ChooseFirstTurn();
+        PlayerActionSelection();
     }
 
-    void ChooseFirstTurn() {
-        if(playerUnit.Pkm.Speed >= enemyUnit.Pkm.Speed) {
-            PlayerActionSelection();
+    IEnumerator RunTurns(BattleAction playerAction) {
+        state = BattleState.RUNNING_TURN;
+
+        if(playerAction == BattleAction.SKILL) {
+            playerUnit.Pkm.CurrentSkill = playerUnit.Pkm.Skills[currentSkill];
+            enemyUnit.Pkm.CurrentSkill = enemyUnit.Pkm.GetRandomSkill();
+
+            //check who goes first
+            bool playerGoFirst = playerUnit.Pkm.Speed >= enemyUnit.Pkm.Speed;
+            var firstUnit = (playerGoFirst) ? playerUnit : enemyUnit;
+            var secondUnit = (playerGoFirst) ? enemyUnit : playerUnit;
+            var secondPokemon = secondUnit.Pkm;
+
+            // first turn
+            yield return RunSkill(firstUnit, secondUnit, firstUnit.Pkm.CurrentSkill, firstUnit.IsPlayerUnit);
+            yield return RunAfterTurn(firstUnit);
+            if(state == BattleState.BATTLE_OVER) yield break;
+
+            // second turn
+            if(secondPokemon.HP > 0) {
+                yield return RunSkill(secondUnit, firstUnit, secondUnit.Pkm.CurrentSkill, secondUnit.IsPlayerUnit);
+                yield return RunAfterTurn(secondUnit);
+                if(state == BattleState.BATTLE_OVER) yield break;
+            }
         } else {
-            StartCoroutine(EnemySkill());
+            if(playerAction == BattleAction.SWITCH_POKEMON) {
+                var selectedMember = playerParty.Pokemons[currentMember];
+                state = BattleState.BUSY;
+                yield return SwitchPokemon(selectedMember);
+            }
+
+            // Enemy Turn
+            var enemySkill = enemyUnit.Pkm.GetRandomSkill();
+            yield return RunSkill(enemyUnit, playerUnit, enemySkill, false);
+            yield return RunAfterTurn(enemyUnit);
+            if(state == BattleState.BATTLE_OVER) yield break;
+        }
+
+        if(state != BattleState.BATTLE_OVER) {
+            PlayerActionSelection();
         }
     }
 
@@ -59,29 +102,6 @@ public class BattleSystem : MonoBehaviour {
         state = BattleState.ACTION_SELECTION;
         dialogBox.SetDialog("Choose an action !!!");
         dialogBox.EnabledActionSelector(true);
-    }
-
-    IEnumerator PlayerSkill() {
-        state = BattleState.PERFORM_SKILL;
-        var skill = playerUnit.Pkm.Skills[currentSkill];
-        yield return RunSkill(playerUnit, enemyUnit, skill, playerUnit.IsPlayerUnit);
-
-        // If the battle state was not changed by RunMove, then go to next step
-        if(state == BattleState.PERFORM_SKILL) {
-            StartCoroutine(EnemySkill());
-        }
-
-    }
-
-    IEnumerator EnemySkill(){
-        state = BattleState.PERFORM_SKILL;
-        var skill = enemyUnit.Pkm.GetRandomSkill();
-        yield return RunSkill(enemyUnit, playerUnit, skill, enemyUnit.IsPlayerUnit);
-
-        // If the battle state was not changed by RunMove, then go to next step
-        if(state == BattleState.PERFORM_SKILL) {
-            PlayerActionSelection();
-        }
     }
 
     IEnumerator ShowDamageDetails(DamageDetails damageDetails) {
@@ -130,6 +150,7 @@ public class BattleSystem : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Z)) {
             if (currentAction == 0) {
                 // Pokemon
+                prevState = state;
                 OpenPartyScreen();
             } else if (currentAction == 1) {
                 PlayerMove();
@@ -160,7 +181,7 @@ public class BattleSystem : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Z)) {
             dialogBox.EnabledSkillSelector(false);
             dialogBox.EnabledDialogText(true);
-            StartCoroutine(PlayerSkill());
+            StartCoroutine(RunTurns(BattleAction.SKILL));
         } else if (Input.GetKeyDown(KeyCode.X)) { // Cancel
             dialogBox.EnabledSkillSelector(false);
             dialogBox.EnabledDialogText(true);
@@ -200,9 +221,13 @@ public class BattleSystem : MonoBehaviour {
             }
 
             partyScreen.gameObject.SetActive(false);
-            state = BattleState.BUSY;
-            StartCoroutine(SwitchPokemon(selectedMember));
-
+            if(prevState == BattleState.ACTION_SELECTION) {
+                prevState = null;
+                StartCoroutine(RunTurns(BattleAction.SWITCH_POKEMON));
+            } else {
+                state = BattleState.BUSY;
+                StartCoroutine(SwitchPokemon(selectedMember));
+            }
         } else if (Input.GetKeyDown(KeyCode.X)) {
             partyScreen.gameObject.SetActive(false);
             PlayerActionSelection();
@@ -211,9 +236,7 @@ public class BattleSystem : MonoBehaviour {
 
     IEnumerator SwitchPokemon(Pokemon newPokemon) {
         dialogBox.EnabledActionSelector(false);
-        bool currentPokemonFainted = true;
         if(playerUnit.Pkm.HP > 0) {
-            currentPokemonFainted = false;
             yield return dialogBox.TypeDialog($"Come back {playerUnit.Pkm.PkmBase.Name} !!!");
             playerUnit.PlayFaintedAnimation();
 
@@ -224,11 +247,7 @@ public class BattleSystem : MonoBehaviour {
         dialogBox.SetSkillName(newPokemon.Skills);
         yield return dialogBox.TypeDialog($"Go {newPokemon.PkmBase.Name} !!!");
 
-        if(currentPokemonFainted) {
-            ChooseFirstTurn();
-        } else {
-            StartCoroutine(EnemySkill());
-        }
+        state = BattleState.RUNNING_TURN;
     }
 
     IEnumerator RunSkill(BattleUnit sourceUnit, BattleUnit targetUnit, Skill skill, bool isPlayerUnit) {
@@ -281,6 +300,11 @@ public class BattleSystem : MonoBehaviour {
         } else {
             yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} missed!!!");
         }
+    }
+
+    IEnumerator RunAfterTurn(BattleUnit sourceUnit) {
+        if(state == BattleState.BATTLE_OVER) yield break;
+        yield return new WaitUntil(() => state == BattleState.RUNNING_TURN);
 
         // vì sao lại là sourceUnit -> Kiểu handle sau khi mày xài skill, nếu đang burn thì sẽ bị đốt
         sourceUnit.Pkm.OnAfterTurn();

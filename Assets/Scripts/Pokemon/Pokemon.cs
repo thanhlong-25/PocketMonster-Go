@@ -19,6 +19,7 @@ public class Pokemon {
     }
 
     public List<Skill> Skills { get; set; }
+    public Skill CurrentSkill { get; set; }
     public int HP { get; set; }
 
     public Dictionary<Stat, int> Stats { get; private set; }
