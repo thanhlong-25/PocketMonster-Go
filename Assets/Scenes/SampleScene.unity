@@ -28460,24 +28460,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wildPokemons:
-  - _PkmBase: {fileID: 11400000, guid: 247bde868b840c04c9e907ad2020fab2, type: 2}
-    _level: 15
-  - _PkmBase: {fileID: 11400000, guid: 4701c4e8674f8224a83c9ac621ace6bc, type: 2}
-    _level: 35
-  - _PkmBase: {fileID: 11400000, guid: c8614b8d682ce5849aa80b4e13272ac8, type: 2}
-    _level: 65
-  - _PkmBase: {fileID: 11400000, guid: 32df287f3469dbf4ab96301fb02fdefa, type: 2}
-    _level: 25
-  - _PkmBase: {fileID: 11400000, guid: bd0fe1ea185323d4d961bf9de42d8397, type: 2}
-    _level: 5
-  - _PkmBase: {fileID: 11400000, guid: 2370cdee0aa78064981243f54096212b, type: 2}
-    _level: 6
-  - _PkmBase: {fileID: 11400000, guid: 307e97407921a364ab745bfa290a7daa, type: 2}
-    _level: 33
   - _PkmBase: {fileID: 11400000, guid: 619eff9307a151649930ad7dc95d5432, type: 2}
-    _level: 44
+    _level: 25
+  - _PkmBase: {fileID: 11400000, guid: 307e97407921a364ab745bfa290a7daa, type: 2}
+    _level: 55
   - _PkmBase: {fileID: 11400000, guid: 55a463be6526a1f46b41afd8779395e3, type: 2}
-    _level: 1
+    _level: 4
 --- !u!1 &1752232487
 GameObject:
   m_ObjectHideFlags: 0

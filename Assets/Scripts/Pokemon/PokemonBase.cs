@@ -132,8 +132,8 @@ public enum Stat {
     SUPER_ATTACK,
     SUPER_DEFENSE,
     SPEED,
-    ACCURACY,
-    EVASION
+    ACCURACY, // chính xác
+    EVASION // né tránh
 }
 
 

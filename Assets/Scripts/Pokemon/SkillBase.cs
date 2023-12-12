@@ -15,6 +15,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] SkillAnimationBase skillAnimationBase;
    [SerializeField] SkillCategory category;
    [SerializeField] SkillEffect effect;
+   [SerializeField] List<SecondaryEffect> secondaryEffects;
    [SerializeField] SkillTarget target;
 
 
@@ -58,6 +59,10 @@ public class SkillBase : ScriptableObject {
         get { return effect; }
     }
 
+    public List<SecondaryEffect> SecondaryEffects {
+        get { return secondaryEffects; }
+    }
+
     public SkillTarget Target {
         get { return target; }
     }
@@ -79,6 +84,20 @@ public class SkillEffect {
 
     public ConditionID VolatileStatus {
         get { return volatileStatus; }
+    }
+}
+
+[System.Serializable]
+public class SecondaryEffect : SkillEffect {
+    [SerializeField] int chance;
+    [SerializeField] SkillTarget target;
+
+    public int Chance {
+        get { return chance; }
+    }
+
+    public SkillTarget Target {
+        get { return target; }
     }
 }
 

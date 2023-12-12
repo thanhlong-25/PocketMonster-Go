@@ -254,12 +254,21 @@ public class BattleSystem : MonoBehaviour {
             yield return new WaitForSeconds(1f);
 
             if(skill.SkillBase.Category == SkillCategory.STATUS) {
-                yield return RunSkillEffect(skill, sourceUnit.Pkm, targetUnit.Pkm);
+                yield return RunSkillEffect(skill.SkillBase.Effect, sourceUnit.Pkm, targetUnit.Pkm, skill.SkillBase.Target);
             } else {
                 var damageDetails = targetUnit.Pkm.TakeDamage(skill, sourceUnit.Pkm);
                 yield return targetUnit.Hud.UpdateHPBar();
                 yield return ShowDamageDetails(damageDetails);
                 yield return new WaitForSeconds(1f);
+            }
+
+            if(skill.SkillBase.SecondaryEffects != null && skill.SkillBase.SecondaryEffects.Count > 0 && targetUnit.Pkm.HP > 0) {
+                foreach (var secondary in skill.SkillBase.SecondaryEffects) {
+                    var rnd = UnityEngine.Random.Range(1, 101);
+                    if(rnd <= secondary.Chance) {
+                        yield return RunSkillEffect(secondary, sourceUnit.Pkm, targetUnit.Pkm, secondary.Target);
+                    }
+                }
             }
 
             if(targetUnit.Pkm.HP <= 0) {
@@ -270,7 +279,7 @@ public class BattleSystem : MonoBehaviour {
                 CheckForBattleOver(targetUnit);
             }
         } else {
-            yield return dialogBox.TypeDialog($"{targetUnit.Pkm.PkmBase.Name} missed!!!");
+            yield return dialogBox.TypeDialog($"{sourceUnit.Pkm.PkmBase.Name} missed!!!");
         }
 
         // vì sao lại là sourceUnit -> Kiểu handle sau khi mày xài skill, nếu đang burn thì sẽ bị đốt
@@ -287,26 +296,24 @@ public class BattleSystem : MonoBehaviour {
         }
     }
 
-    IEnumerator RunSkillEffect(Skill skill, Pokemon source, Pokemon target) {
-        var effects = skill.SkillBase.Effect;
-
+    IEnumerator RunSkillEffect(SkillEffect effect, Pokemon source, Pokemon target, SkillTarget skillTarget) {
         // Stat Boosting
-        if(effects.Boosts != null) {
-            if(skill.SkillBase.Target == SkillTarget.SELF) {
-                source.ApplyBoosts(effects.Boosts);
+        if(effect.Boosts != null) {
+            if(skillTarget == SkillTarget.SELF) {
+                source.ApplyBoosts(effect.Boosts);
             } else {
-                target.ApplyBoosts(effects.Boosts);
+                target.ApplyBoosts(effect.Boosts);
             }
         }
 
         // Status Condition
-        if(effects.Status != ConditionID.none) {
-            target.SetStatus(effects.Status);
+        if(effect.Status != ConditionID.none) {
+            target.SetStatus(effect.Status);
         }
 
         // Status Condition
-        if(effects.VolatileStatus != ConditionID.none) {
-            target.SetVolatileStatus(effects.VolatileStatus);
+        if(effect.VolatileStatus != ConditionID.none) {
+            target.SetVolatileStatus(effect.VolatileStatus);
         }
 
         yield return ShowStatusChanges(source);
@@ -339,7 +346,7 @@ public class BattleSystem : MonoBehaviour {
         float skillAccuracy = skill.SkillBase.Accuracy;
         int accuracy = sourceUnit.StatBoosts[Stat.ACCURACY];
         int evasion = targetUnit.StatBoosts[Stat.EVASION];
-        var boostValues = new float[]  { 1f, 4f / 3f, 5f / 3f, 2f, 7f / 3f, 8f / 3f, 3f };
+        var boostValues = new float[]  { 1f, 1.3f, 1.6f, 2f, 2.3f, 2.6f, 3f };
 
         if(accuracy > 0) {
             skillAccuracy *= boostValues[accuracy];
