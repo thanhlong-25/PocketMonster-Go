@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed;
     public LayerMask foregroundLayer;
     public LayerMask grassLayer;
+    public LayerMask interactableLayer;
 
     public event Action OnEncoutered;
 
@@ -54,7 +55,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private bool IsWalkable(Vector3 targetPos) {
-        if (Physics2D.OverlapCircle(targetPos, 0.1f, foregroundLayer) != null) {
+        if (Physics2D.OverlapCircle(targetPos, 0.1f, foregroundLayer | interactableLayer) != null) {
             return false;
         }
         return true;

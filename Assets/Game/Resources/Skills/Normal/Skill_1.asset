@@ -20,7 +20,7 @@ MonoBehaviour:
   alwaysHits: 0
   timesCanUse: 2
   priority: 0
-  skillAnimationBase: {fileID: 0}
+  skillAnimationBase: {fileID: 11400000, guid: a974a83051c7aae44991546c1fb1f11e, type: 2}
   category: 0
   effect:
     boosts: []

@@ -11,6 +11,8 @@ public class SkillAnimation  : MonoBehaviour {
     }
 
     public IEnumerator PlaySkillAnimation(Sprite[] skillSprite) {
+        Debug.Log("skillSprite size");
+        Debug.Log(skillSprite.Length);
         spriteRender.enabled = true;
         for (int i = 0; i < skillSprite.Length; i++) {
             spriteRender.sprite = skillSprite[i];

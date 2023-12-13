@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e8bed9ae7cc6d4a9c4cfb85b8ff4e0, type: 3}
   m_Name: Skill_2
   m_EditorClassIdentifier: 
-  name: 
+  name: buff
   description: 
-  type: 0
+  type: 1
   power: 0
   accuracy: 0
   alwaysHits: 0
   timesCanUse: 2
   priority: 0
-  skillAnimationBase: {fileID: 0}
+  skillAnimationBase: {fileID: 11400000, guid: a974a83051c7aae44991546c1fb1f11e, type: 2}
   category: 2
   effect:
     boosts:
