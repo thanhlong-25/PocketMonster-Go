@@ -16,11 +16,11 @@ MonoBehaviour:
   description: 
   type: 1
   power: 0
-  accuracy: 0
+  accuracy: 100
   alwaysHits: 0
   timesCanUse: 2
-  priority: 0
-  skillAnimationBase: {fileID: 11400000, guid: a974a83051c7aae44991546c1fb1f11e, type: 2}
+  priority: 1
+  skillAnimationBase: {fileID: 11400000, guid: 89a6497d85e82b143a2b6ecfbed5099e, type: 2}
   category: 2
   effect:
     boosts:

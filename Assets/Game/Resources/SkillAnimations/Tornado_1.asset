@@ -12,5 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d7aab9022369469a4e087fdfeafaa, type: 3}
   m_Name: Tornado_1
   m_EditorClassIdentifier: 
-  name: Wind_2
-  skillFrame: []
+  name: Tornado_1
+  skillFrame:
+  - {fileID: -61179042, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -1561823712, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -155446719, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -744912799, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: 84967222, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: 326575024, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -285677545, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: 1451348546, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -1174605480, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: 1475947775, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -1650997763, guid: 10dd21e38d652d1489588bcf60766098, type: 3}
+  - {fileID: -829873044, guid: 10dd21e38d652d1489588bcf60766098, type: 3}

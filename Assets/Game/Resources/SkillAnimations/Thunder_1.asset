@@ -12,5 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d7aab9022369469a4e087fdfeafaa, type: 3}
   m_Name: Thunder_1
   m_EditorClassIdentifier: 
-  name: 
-  skillFrame: []
+  name: Thunder_1
+  skillFrame:
+  - {fileID: -935759871, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: -935759871, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 84271929, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 84271929, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: -1888240112, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: -1888240112, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 981889740, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 981889740, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 626195669, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 626195669, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 1730900756, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}
+  - {fileID: 1730900756, guid: 8eb3948487fc7a94f88cf6c6e02e7858, type: 3}

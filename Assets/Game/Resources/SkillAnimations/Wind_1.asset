@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1d7aab9022369469a4e087fdfeafaa, type: 3}
   m_Name: Wind_1
   m_EditorClassIdentifier: 
-  name: Wind
+  name: Wind_1
   skillFrame:
   - {fileID: 1159587916, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
   - {fileID: -683607934, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
@@ -22,3 +22,9 @@ MonoBehaviour:
   - {fileID: -364541448, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
   - {fileID: -1383858036, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
   - {fileID: 714726848, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: -1108638176, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: -476481297, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: -1858011796, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: -1980540980, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: -1925431642, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
+  - {fileID: 574922413, guid: 8443c35a598616a4287ded328f2dab2b, type: 3}
