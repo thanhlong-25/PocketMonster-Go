@@ -12,6 +12,7 @@ public class SkillBase : ScriptableObject {
    [SerializeField] int accuracy; // chính xác
    [SerializeField] bool alwaysHits;
    [SerializeField] int timesCanUse; // số lượt dùng
+   [SerializeField] int priority; // số lượt dùng
    [SerializeField] SkillAnimationBase skillAnimationBase;
    [SerializeField] SkillCategory category;
    [SerializeField] SkillEffect effect;
@@ -41,6 +42,10 @@ public class SkillBase : ScriptableObject {
 
     public int TimesCanUse {
         get { return timesCanUse; }
+    }
+
+    public int Priority {
+        get { return priority; }
     }
 
     public bool AlwaysHits {

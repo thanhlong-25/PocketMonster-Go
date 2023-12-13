@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f849fcb900bf8b42916497597f7769c
+guid: 27041c3164214da48837a588ae01d2f0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -107,7 +107,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Android
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -120,7 +120,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
-    buildTarget: Server
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -134,49 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: X-Scizzor_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0671a3dc91e68b4282b953b239b60d9
-      internalID: 1230026152
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: X-Scizzor_1
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b6e2750ad7b19dd4ca95970aa9a3546d
-      internalID: 1634740372
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -188,8 +146,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      X-Scizzor_0: 1230026152
-      X-Scizzor_1: 1634740372
+      Flash Cirle_0: -1068825814
+      Flash Cirle_1: 109726042
+      Flash Cirle_2: 2022965631
+      Flash Cirle_3: -1511775107
+      Flash Cirle_4: -1537358222
+      Flash Cirle_5: -1632012407
+      Flash Cirle_6: 873963392
+      Flash Cirle_7: -16251446
+      Flash Cirle_8: 984671032
+      Flash Cirle_9: 1023747162
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -62,8 +62,15 @@ public class BattleSystem : MonoBehaviour {
             playerUnit.Pkm.CurrentSkill = playerUnit.Pkm.Skills[currentSkill];
             enemyUnit.Pkm.CurrentSkill = enemyUnit.Pkm.GetRandomSkill();
 
+            int playerMovePriority = playerUnit.Pkm.CurrentSkill.SkillBase.Priority;
+            int enemyMovePriority = enemyUnit.Pkm.CurrentSkill.SkillBase.Priority;
             //check who goes first
-            bool playerGoFirst = playerUnit.Pkm.Speed >= enemyUnit.Pkm.Speed;
+            bool playerGoFirst = true;
+            if(enemyMovePriority > playerMovePriority) {
+                playerGoFirst = false;
+            } else if(enemyMovePriority == playerMovePriority){
+                playerGoFirst = playerUnit.Pkm.Speed >= enemyUnit.Pkm.Speed;
+            }
             var firstUnit = (playerGoFirst) ? playerUnit : enemyUnit;
             var secondUnit = (playerGoFirst) ? enemyUnit : playerUnit;
             var secondPokemon = secondUnit.Pkm;
@@ -179,6 +186,8 @@ public class BattleSystem : MonoBehaviour {
         dialogBox.UpdateSkillSelection(currentSkill, playerUnit.Pkm.Skills[currentSkill]);
 
         if(Input.GetKeyDown(KeyCode.Z)) {
+            var skill = playerUnit.Pkm.Skills[currentSkill];
+            if(skill.timesCanUse == 0) return;
             dialogBox.EnabledSkillSelector(false);
             dialogBox.EnabledDialogText(true);
             StartCoroutine(RunTurns(BattleAction.SKILL));
@@ -370,7 +379,7 @@ public class BattleSystem : MonoBehaviour {
         float skillAccuracy = skill.SkillBase.Accuracy;
         int accuracy = sourceUnit.StatBoosts[Stat.ACCURACY];
         int evasion = targetUnit.StatBoosts[Stat.EVASION];
-        var boostValues = new float[]  { 1f, 1.3f, 1.6f, 2f, 2.3f, 2.6f, 3f };
+        var boostValues = new float[]  { 1f, 1.5f, 2f, 2.5f, 3f, 3.5f, 4f };
 
         if(accuracy > 0) {
             skillAccuracy *= boostValues[accuracy];

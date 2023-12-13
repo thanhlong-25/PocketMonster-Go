@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ba2f31aa27b3b1248833b47f28751497
+guid: 6f849fcb900bf8b42916497597f7769c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -134,91 +134,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: zan03_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b6a94dd7f533114f83a004007183983
-      internalID: -1279741566
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zan03_1
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b76b5a975706ac54491b29673d50e3c2
-      internalID: -2032219635
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zan03_2
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7d2405126c22c5d4693bcc7b4a3dea8a
-      internalID: 1564208247
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: zan03_3
-      rect:
-        serializedVersion: 2
-        x: 576
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4e6f3a751d118e546bba5a1972a573fa
-      internalID: 285968364
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -230,10 +146,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      zan03_0: -1279741566
-      zan03_1: -2032219635
-      zan03_2: 1564208247
-      zan03_3: 285968364
+      Cut_0: 1230026152
+      Cut_1: 1634740372
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

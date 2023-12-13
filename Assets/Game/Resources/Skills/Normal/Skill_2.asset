@@ -10,12 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8e8bed9ae7cc6d4a9c4cfb85b8ff4e0, type: 3}
-  m_Name: Crush Claw
+  m_Name: Skill_2
   m_EditorClassIdentifier: 
-  name: Crush Claw
-  description: May lower opponent's Defense.
-  type: 1
-  power: 75
-  accuracy: 95
-  timesCanUse: 10
-  skillAnimationBase: {fileID: 11400000, guid: 1c48cf0e22ff894449c2fd665af61fd2, type: 2}
+  name: 
+  description: 
+  type: 0
+  power: 0
+  accuracy: 0
+  alwaysHits: 0
+  timesCanUse: 2
+  priority: 0
+  skillAnimationBase: {fileID: 0}
+  category: 2
+  effect:
+    boosts:
+    - stat: 0
+      boost: 1
+    - stat: 1
+      boost: 1
+    status: 0
+    volatileStatus: 0
+  secondaryEffects: []
+  target: 1

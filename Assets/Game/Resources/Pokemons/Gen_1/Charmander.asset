@@ -29,8 +29,4 @@ MonoBehaviour:
   spAtk: 60
   spDef: 50
   spd: 65
-  learnableSkills:
-  - skillBase: {fileID: 11400000, guid: 94ad41c0d05a2b1419ab4573c9813a1a, type: 2}
-    level: 1
-  - skillBase: {fileID: 11400000, guid: 3d7cce9433766164ab907017691d3739, type: 2}
-    level: 1
+  learnableSkills: []

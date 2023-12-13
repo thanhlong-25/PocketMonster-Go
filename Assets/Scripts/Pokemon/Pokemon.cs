@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [System.Serializable]
 public class Pokemon {
@@ -97,7 +98,7 @@ public class Pokemon {
             } else {
                 StatusChanges.Enqueue($"{PkmBase.Name}'s {stat} fell !!!");
             }
-            StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6);
+            StatBoosts[stat] = Mathf.Clamp(StatBoosts[stat] + boost, -6, 6); // -6 và 6 để đảm bảo không buff hoặc debuff quá mức
         }
     }
 
@@ -180,8 +181,9 @@ public class Pokemon {
     }
 
     public Skill GetRandomSkill() {
-        int r = Random.Range(0, Skills.Count);
-        return Skills[r];
+        var skillsWithPP = Skills.Where(x => x.timesCanUse > 0).ToList();
+        int r = Random.Range(0, skillsWithPP.Count);
+        return skillsWithPP[r];
     }
 
     public bool OnBeforeSkill() {

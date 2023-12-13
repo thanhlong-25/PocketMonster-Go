@@ -66,6 +66,14 @@ public class BattleDialogBox : MonoBehaviour {
 
         skillPPText.text = $"PP {skill.timesCanUse}/{skill.SkillBase.TimesCanUse}";
         skillTypeText.text = skill.SkillBase.Type.ToString();
+
+        if(skill.timesCanUse == 0) {
+            skillPPText.color = Color.red;
+        } else if(skill.timesCanUse <= skill.SkillBase.TimesCanUse / 2) {
+            skillPPText.color = new Color(1f, 0.647f, 0f);
+        } else {
+            skillPPText.color = Color.black;
+        }
     }
 
     public void SetSkillName(List<Skill> skills) {

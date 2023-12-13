@@ -10,12 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8e8bed9ae7cc6d4a9c4cfb85b8ff4e0, type: 3}
-  m_Name: Comet Punch
+  m_Name: Skill_1
   m_EditorClassIdentifier: 
-  name: Comet Punch
-  description: Hits 2-5 times in one turn.
-  type: 1
-  power: 18
-  accuracy: 85
-  timesCanUse: 15
-  skillAnimationBase: {fileID: 11400000, guid: 9f6abe9b0e5cd6c459bb94acde048097, type: 2}
+  name: "t\u1EA5n c\xF4ng"
+  description: 
+  type: 2
+  power: 10
+  accuracy: 50
+  alwaysHits: 0
+  timesCanUse: 2
+  priority: 0
+  skillAnimationBase: {fileID: 0}
+  category: 0
+  effect:
+    boosts: []
+    status: 0
+    volatileStatus: 0
+  secondaryEffects: []
+  target: 0
