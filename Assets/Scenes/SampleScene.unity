@@ -29304,7 +29304,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5721607}
+  m_Offset: {x: 0, y: -0.23293415}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -29315,7 +29315,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.63673973, y: 0.115166366}
+  m_Size: {x: 0.63673973, y: 0.7874648}
   m_EdgeRadius: 0
 --- !u!50 &1891713261
 Rigidbody2D:
@@ -29358,9 +29358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogBox:
     lines:
-    - "M\xE0y l\xE0 nh\xE0 hu\u1EA5n luy\u1EC7n t\xE0i ba \xE0?"
-    - "N\u1EBFu m\xE0y luy\u1EC7n t\u1EADp th\xEAm 500 n\u0103m n\u1EEFa th\xEC may
-      ra c\xF3 kh\u1EA3 n\u0103ng \u0111\xE1nh b\u1EA1i tao"
+    - "Hello Ph\u01B0\u01A1ng Qu\u1EF3nh!!!"
 --- !u!1 &1943328844
 GameObject:
   m_ObjectHideFlags: 0
@@ -29790,7 +29788,7 @@ Transform:
   m_GameObject: {fileID: 2042599592}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.71, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
