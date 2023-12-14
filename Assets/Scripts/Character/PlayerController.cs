@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public float moveSpeed;
     public LayerMask foregroundLayer;
     public LayerMask grassLayer;
     public LayerMask interactableLayer;
@@ -40,12 +39,26 @@ public class PlayerController : MonoBehaviour {
         }
 
         animator.SetBool("isMoving", isMoving);
+
+        if(Input.GetKeyDown(KeyCode.Z)) {
+            Interact();
+        }
+    }
+
+    void Interact() {
+        var facingDir = new Vector3(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+        var interactPos = transform.position + facingDir;
+
+        var collider = Physics2D.OverlapCircle(interactPos, 0.5f, interactableLayer);
+        if(collider != null) {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
     }
 
     IEnumerator Move(Vector3 targetPos) {
         isMoving = true;
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon) {
-            transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Constants.MOVE_SPEED * Time.deltaTime);
             yield return null;
         }
         transform.position = targetPos;

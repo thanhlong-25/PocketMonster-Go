@@ -4,7 +4,8 @@ using UnityEngine;
 
 public enum GameState {
     FREE_ROAM,
-    BATTLE
+    BATTLE,
+    CHATTING
 }
 
 public class MainController : MonoBehaviour {
@@ -20,6 +21,16 @@ public class MainController : MonoBehaviour {
     private void Start() {
         playerController.OnEncoutered += StartBattle;
         battleSystem.OnBattleOver += EndBattle;
+
+        DialogController.Instance.OnShowDialog += () => {
+            state = GameState.CHATTING;
+        };
+
+        DialogController.Instance.OnCloseDialog += () => {
+            if(state == GameState.CHATTING) {
+                state = GameState.FREE_ROAM;
+            }
+        };
     }
 
     void StartBattle() {
@@ -44,6 +55,8 @@ public class MainController : MonoBehaviour {
             playerController.HandleUpdate();
         } else if (state == GameState.BATTLE) {
             battleSystem.HandleUpdate();
+        } else if (state == GameState.CHATTING) {
+            DialogController.Instance.HandleUpdate();
         }
     }
 }

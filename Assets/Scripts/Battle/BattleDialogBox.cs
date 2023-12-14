@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleDialogBox : MonoBehaviour {
-    [SerializeField] int letterPerSecond;
     [SerializeField] Color highlightedColor;
     [SerializeField] Text dialogText;
 
@@ -26,7 +25,7 @@ public class BattleDialogBox : MonoBehaviour {
         dialogText.text = "";
         foreach (var letter in dialog.ToCharArray()) {
             dialogText.text += letter;
-            yield return new WaitForSeconds(1f / letterPerSecond);
+            yield return new WaitForSeconds(1f / Constants.LETTER_PER_SECOND);
         }
 
         yield return new WaitForSeconds(1f);
