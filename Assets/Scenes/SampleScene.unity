@@ -29246,7 +29246,7 @@ SpriteRenderer:
   m_SortingLayerID: -113026505
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 339852694, guid: 06443fd550b7aba4ab365cfaa64622a7, type: 3}
+  m_Sprite: {fileID: -593736375, guid: b0c9b8e2ba87be94dbf2fec3e3e0ad86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -29308,7 +29308,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1.5}
+    oldSize: {x: 1.5, y: 1.5}
     newSize: {x: 1, y: 1.5}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -29359,6 +29359,11 @@ MonoBehaviour:
   dialogBox:
     lines:
     - "Hello Ph\u01B0\u01A1ng Qu\u1EF3nh!!!"
+  sprites:
+  - {fileID: -593736375, guid: b0c9b8e2ba87be94dbf2fec3e3e0ad86, type: 3}
+  - {fileID: -2032183216, guid: b0c9b8e2ba87be94dbf2fec3e3e0ad86, type: 3}
+  - {fileID: -174232084, guid: b0c9b8e2ba87be94dbf2fec3e3e0ad86, type: 3}
+  - {fileID: 1316170346, guid: b0c9b8e2ba87be94dbf2fec3e3e0ad86, type: 3}
 --- !u!1 &1943328844
 GameObject:
   m_ObjectHideFlags: 0

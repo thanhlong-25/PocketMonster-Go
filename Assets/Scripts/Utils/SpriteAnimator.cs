@@ -8,7 +8,7 @@ public class SpriteAnimator {
     float frameRate;
 
     int currentFrame;
-    floar timer;
+    float timer;
 
     public SpriteAnimator(List<Sprite> frames, SpriteRenderer spriteRenderer, float frameRate = 0.16f){
         this.frames = frames;
@@ -23,7 +23,7 @@ public class SpriteAnimator {
     }
 
     public void HandleUpdate() {
-        timer += Timer.deltaTime;
+        timer += Time.deltaTime;
         if(timer > frameRate) {
             currentFrame = (currentFrame + 1) % frames.Count;
             spriteRenderer.sprite = frames[currentFrame];
